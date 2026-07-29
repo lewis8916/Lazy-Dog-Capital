@@ -1,48 +1,49 @@
 "use client";
 
-import { Zap, Shield, Users, FileCheck, Clock, TrendingUp } from "lucide-react";
+import { Hammer, Eye, HandCoins, Wrench, MapPin, Sprout } from "lucide-react";
 
 const benefits = [
   {
-    icon: Zap,
-    title: "Close in 7 Days",
-    desc: "Direct lender with in-house capital. No middlemen, no broker delays — just decisions in hours and funds in days.",
+    icon: Hammer,
+    title: "Operators, Not Spreadsheets",
+    desc: "800+ transactions across flips, sales, construction, rehabs, and remodels. We read your project the way a builder does — not the way a bank's software does.",
   },
   {
-    icon: Shield,
-    title: "Common-Sense Underwriting",
-    desc: "We evaluate the deal, not just the credit score. Strong asset, strong sponsor, strong exit — we'll find a way.",
+    icon: Eye,
+    title: "Experienced Eyes on Your Deal",
+    desc: "We evaluate every deal as operators, so we can flag problems in scope, budget, or resale value before they become expensive lessons.",
   },
   {
-    icon: Users,
-    title: "Real Humans, Real Phones",
-    desc: "Every borrower gets a dedicated relationship manager. The person who quotes your deal is the one who closes it.",
+    icon: HandCoins,
+    title: "Our Own Money in Every Deal",
+    desc: "We put our own capital into every loan we fund. When your flip succeeds, we succeed — that's the business model, not a favor.",
   },
   {
-    icon: FileCheck,
-    title: "Transparent Terms",
-    desc: "No junk fees, no rate surprises at the closing table. Term sheets in plain English, signed and honored.",
+    icon: Wrench,
+    title: "In-House Crews",
+    desc: "We own a repair company and a property management company. If a job gets complicated, you're talking to people who've solved it hundreds of times.",
   },
   {
-    icon: Clock,
-    title: "Built for Repeat Borrowers",
-    desc: "Streamlined re-approval for active investors. Your fifth loan should be easier than your first — and it is.",
+    icon: Sprout,
+    title: "Built for First-Timers",
+    desc: "New to flipping? That's fine. What matters is a sound deal and a willingness to do the work — we'll help you pressure-test the rest.",
   },
   {
-    icon: TrendingUp,
-    title: "Scale With Confidence",
-    desc: "From your first flip to a 50-door portfolio — we grow with you. Volume pricing kicks in earlier than you'd expect.",
+    icon: MapPin,
+    title: "DFW, Street by Street",
+    desc: "Dallas–Fort Worth is our backyard. We know the neighborhoods, the buyers, and what a finished house should sell for.",
   },
 ];
 
-export default function WhyChooseUs() {
+export default function WhyChooseUs({ standalone = false }) {
   return (
     <section
       id="why"
-      className="section relative overflow-hidden noise"
+      className={`section relative overflow-hidden noise ${
+        standalone ? "pt-40" : ""
+      }`}
       style={{
-        background:
-          "linear-gradient(180deg, #21413A 0%, #1a2f29 100%)",
+        background: "linear-gradient(180deg, #1E3C36 0%, #16302B 100%)",
       }}
     >
       <div className="absolute top-1/3 -left-40 w-[400px] h-[400px] rounded-full bg-bronze/5 blur-3xl" />
@@ -54,14 +55,18 @@ export default function WhyChooseUs() {
             <span className="eyebrow text-bronze">Why Lazy Dog</span>
           </div>
           <h2 className="display text-cream text-4xl sm:text-5xl mb-5">
-            Built by investors. <br />
-            Backed by capital. <br />
-            <span className="text-bronze italic font-normal">Driven by speed.</span>
+            Built by builders. <br />
+            Backed by our own capital. <br />
+            <span className="text-bronze italic font-normal">
+              Invested in your finish line.
+            </span>
           </h2>
           <p className="text-cream/70 text-lg leading-relaxed">
-            We started Lazy Dog Capital because we were tired of losing deals to
-            slow lenders. Today we fund more than a hundred loans a month — and
-            we still answer on the second ring.
+            Lazy Dog Capital is run by two Dallas–Fort Worth investors —
+            Lewis McKnight and Stephen Maner — with 800+ deals, in-house
+            construction crews, and 23 years in this market behind them.
+            Plenty of lenders will run your deal through a spreadsheet.
+            We've spent decades doing exactly what you're about to do.
           </p>
         </div>
 

@@ -8,21 +8,21 @@ module.exports = {
     extend: {
       colors: {
         teal: {
-          DEFAULT: "#21413A",
-          dark: "#1a2f29",
+          DEFAULT: "#1E3C36",
+          dark: "#16302B",
         },
         cream: {
-          DEFAULT: "#F3EDE1",
-          light: "#f9f6f2",
+          DEFAULT: "#F0EADE",
+          light: "#F8F4EB",
         },
         bronze: {
-          DEFAULT: "#C9962F",
-          light: "#d9ad4a",
-          dark: "#a87a20",
+          DEFAULT: "#C89430",
+          light: "#D5A94A",
+          dark: "#A87A20",
         },
       },
       fontFamily: {
-        sans: ["var(--font-poppins)", "system-ui", "sans-serif"],
+        sans: ["Poppins", "system-ui", "sans-serif"],
       },
       animation: {
         "fade-up": "fadeUp 0.8s ease-out forwards",

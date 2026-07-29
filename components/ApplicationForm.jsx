@@ -4,10 +4,8 @@ import { useState } from "react";
 import { CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
 
 const loanTypes = [
-  "Fix & Flip",
-  "Ground-Up Construction",
-  "Bridge Loan",
-  "Rental / DSCR",
+  "Fix & Flip — buying a property",
+  "Fix & Flip — project in progress",
   "Not sure yet",
 ];
 
@@ -15,13 +13,13 @@ const initial = {
   name: "",
   email: "",
   phone: "",
-  loanType: "Fix & Flip",
+  loanType: "Fix & Flip — buying a property",
   loanAmount: "",
   propertyAddress: "",
   message: "",
 };
 
-export default function ApplicationForm() {
+export default function ApplicationForm({ standalone = false }) {
   const [form, setForm] = useState(initial);
   const [status, setStatus] = useState("idle"); // idle | submitting | success
   const [errors, setErrors] = useState({});
@@ -56,7 +54,9 @@ export default function ApplicationForm() {
   return (
     <section
       id="apply"
-      className="section relative overflow-hidden"
+      className={`section relative overflow-hidden ${
+        standalone ? "pt-40" : ""
+      }`}
       style={{
         background:
           "linear-gradient(135deg, #1a2f29 0%, #21413A 60%, #2a5249 100%)",
@@ -73,19 +73,20 @@ export default function ApplicationForm() {
               <span className="eyebrow text-bronze">Apply Now</span>
             </div>
             <h2 className="display text-cream text-4xl sm:text-5xl mb-6">
-              Get a term sheet today.
+              Let&apos;s look at your deal.
             </h2>
             <p className="text-cream/75 text-lg leading-relaxed mb-10">
-              Tell us about your deal. A senior loan officer will reach out within
-              four business hours with an indicative quote — no obligation, no
-              soft credit pull.
+              Tell us about the property — what you&apos;re buying, what it
+              needs, and what it&apos;ll be worth finished. We&apos;ll review it
+              and reach out to walk through the numbers. No obligation, and it
+              costs nothing to hear your terms.
             </p>
 
             <div className="space-y-5">
               {[
-                ["1", "Submit your deal", "30 seconds — no credit check"],
-                ["2", "Talk to a real human", "Within 4 business hours"],
-                ["3", "Sign and close", "Average 7 days to wire"],
+                ["1", "Tell us the deal", "Address, price, rehab budget, ARV"],
+                ["2", "Walk the numbers with us", "We review it the way builders do"],
+                ["3", "Close at title", "Fast, clean, and on record"],
               ].map(([n, t, d]) => (
                 <div key={n} className="flex gap-4">
                   <div className="w-10 h-10 rounded-full border border-bronze/40 text-bronze font-bold flex items-center justify-center flex-shrink-0">
@@ -111,8 +112,8 @@ export default function ApplicationForm() {
                     Application received.
                   </h3>
                   <p className="text-teal/70 max-w-md mx-auto leading-relaxed">
-                    Thanks, {form.name.split(" ")[0]}. A loan officer will reach
-                    out to <strong>{form.email}</strong> within four business hours.
+                    Thanks, {form.name.split(" ")[0]}. We&apos;ll reach out to{" "}
+                    <strong>{form.email}</strong> to walk through the deal.
                   </p>
                   <button
                     onClick={() => {

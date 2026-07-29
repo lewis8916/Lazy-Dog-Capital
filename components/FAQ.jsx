@@ -5,28 +5,32 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    q: "How fast can you actually close?",
-    a: "Our average close is 7 business days from a complete file. We've closed clean deals in 72 hours when title and insurance are pre-ordered. The pace is set by appraisal and title — not by us.",
+    q: "I've never flipped a house. Will you actually lend to me?",
+    a: "Yes — newer investors are exactly who this was built for. What matters is a sound deal and a willingness to do the work; we help you pressure-test the rest before anyone signs anything.",
   },
   {
-    q: "What are your minimum credit and experience requirements?",
-    a: "We prefer 660+ FICO for fix-and-flip and bridge products, but we lend below that with stronger asset coverage. First-time investors are welcome; we just structure the deal accordingly (typically lower LTC and a stricter rehab budget).",
+    q: "How much can I borrow?",
+    a: "The lower of two numbers: 80% of the home's after-repair value, or the purchase price minus your down payment, plus the rehab budget and a 10% buffer on it. Sizing the loan conservatively protects you as much as it protects us.",
   },
   {
-    q: "Do you lend in every state?",
-    a: "We currently lend in 42 states. Excluded: AK, HI, MN, ND, NV, SD, UT, VT. DSCR rental loans are available in all 50 states.",
+    q: "What does the loan cost?",
+    a: "Rate and points are set deal by deal and quoted plainly before you commit — and it costs nothing to hear them. You pay interest monthly, and the principal comes back at payoff.",
   },
   {
-    q: "What documentation do you need to issue a term sheet?",
-    a: "For an indicative term sheet: property address, purchase price, rehab budget, ARV estimate, and a one-page sponsor bio. We turn most term sheets in 4 business hours.",
+    q: "What do you need from me to look at a deal?",
+    a: "Four things: the property address, the purchase price, your rehab scope and budget, and what you believe it's worth finished. We'll check the numbers and the comps ourselves.",
   },
   {
-    q: "Are there prepayment penalties?",
-    a: "Short-term bridge and fix-and-flip loans have no prepay. DSCR 30-year loans default to a 3-2-1 step-down, with buy-down options at pricing.",
+    q: "How do rehab draws work?",
+    a: "Finish a stage of work, we verify it, the money for it releases — in up to five draws across the project. It keeps cash flowing to the job and the budget honest.",
   },
   {
-    q: "How are your rehab draws handled?",
-    a: "Draws are reimbursement-based and released within 48 hours of inspection. We use third-party inspectors with a $250 flat fee per draw — no junk lender fees on top.",
+    q: "Can I pay the loan off early?",
+    a: "Any time, with no penalty. Sell in month four instead of month eight and you simply pay less interest.",
+  },
+  {
+    q: "What kinds of properties do you lend on?",
+    a: "Non-owner-occupied single-family fix & flip projects in Dallas–Fort Worth. These are business-purpose loans for investment property — not loans on a home you plan to live in.",
   },
 ];
 
@@ -41,14 +45,14 @@ export default function FAQ() {
             <div className="md:sticky md:top-32">
               <div className="flex items-center gap-3 mb-5">
                 <span className="bronze-bar" />
-                <span className="eyebrow text-bronze">FAQ</span>
+                <span className="eyebrow text-bronze">Common Questions</span>
               </div>
               <h2 className="display text-teal text-4xl sm:text-5xl mb-5">
-                Straight answers.
+                Ask us anything.
               </h2>
               <p className="text-teal/70 leading-relaxed">
-                If your question isn't here, call a loan officer directly. We'd
-                rather have a 10-minute conversation than send you a 30-page PDF.
+                If your question isn&apos;t here, just call us. We&apos;d rather
+                have a ten-minute conversation than send you a thirty-page PDF.
               </p>
             </div>
           </div>

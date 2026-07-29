@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, Phone } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -9,7 +10,7 @@ export default function Hero() {
       className="relative min-h-screen flex items-center overflow-hidden noise"
       style={{
         background:
-          "radial-gradient(ellipse at top left, #2a5249 0%, #21413A 45%, #1a2f29 100%)",
+          "radial-gradient(ellipse at top left, #2a5249 0%, #1E3C36 45%, #16302B 100%)",
       }}
     >
       {/* Decorative gold rings */}
@@ -22,38 +23,42 @@ export default function Hero() {
           <div className="md:col-span-7 animate-fade-up">
             <div className="flex items-center gap-3 mb-7">
               <span className="bronze-bar" />
-              <span className="eyebrow text-bronze">Private Capital · Est. 2018</span>
+              <span className="eyebrow text-bronze">
+                Private Capital · Dallas–Fort Worth
+              </span>
             </div>
 
             <h1 className="display text-cream text-5xl sm:text-6xl lg:text-7xl mb-7">
-              Hard Money
+              Your first flip
               <br />
-              Lending
-              <span className="text-bronze italic font-normal"> Made </span>
-              Simple.
+              deserves a lender
+              <br />
+              <span className="text-bronze italic font-normal">
+                who&apos;s done it.
+              </span>
             </h1>
 
             <p className="text-cream/75 text-lg max-w-xl leading-relaxed mb-10">
-              Fast, flexible financing for real estate investors. Close in as little
-              as 7 days with transparent terms, common-sense underwriting, and a
-              team that picks up the phone.
+              Fix &amp; flip capital from people who buy, build, and sell houses
+              for a living. One loan covers the purchase and the rehab — and it
+              closes at the speed the deal requires.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
-              <a href="#apply" className="btn-primary">
+              <Link href="/apply" className="btn-primary">
                 Start Your Application <ArrowRight size={18} />
-              </a>
-              <a href="tel:+18005551234" className="btn-ghost">
-                <Phone size={16} /> (800) 555-1234
-              </a>
+              </Link>
+              <Link href="/loan" className="btn-ghost">
+                How the loan works <ArrowRight size={16} />
+              </Link>
             </div>
 
-            {/* Trust stats */}
+            {/* Trust stats — the real ones */}
             <div className="mt-16 grid grid-cols-3 gap-6 max-w-xl">
               {[
-                { v: "$420M+", l: "Funded" },
-                { v: "1,800+", l: "Loans Closed" },
-                { v: "7 Days", l: "Avg. Close" },
+                { v: "800+", l: "Deals behind us" },
+                { v: "23 yrs", l: "In real estate" },
+                { v: "DFW", l: "Our home market" },
               ].map((s) => (
                 <div key={s.l} className="border-l border-bronze/40 pl-4">
                   <div className="text-cream text-2xl sm:text-3xl font-bold">
@@ -67,37 +72,39 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Visual side card */}
+          {/* Visual side card — loan structure, no rates */}
           <div className="md:col-span-5 animate-fade-in">
             <div className="relative">
               <div className="absolute -inset-4 bg-bronze/10 rounded-3xl blur-2xl" />
               <div className="relative bg-cream rounded-3xl p-8 shadow-2xl">
                 <div className="flex items-start justify-between mb-6">
                   <div>
-                    <div className="eyebrow text-bronze">Quick Estimate</div>
+                    <div className="eyebrow text-bronze">The Structure</div>
                     <div className="text-teal text-2xl font-bold mt-1">
-                      Loan Snapshot
+                      How Your Loan Works
                     </div>
                   </div>
-                  <div className="w-12 h-12 rounded-full bg-bronze flex items-center justify-center text-cream font-bold">
-                    LD
-                  </div>
+                  <img
+                    src="/logo_icon.png"
+                    alt="Lazy Dog Capital"
+                    className="w-12 h-auto"
+                  />
                 </div>
 
                 <div className="space-y-4">
                   {[
-                    ["Loan Amount", "$485,000"],
-                    ["Property Type", "Fix & Flip — SFR"],
-                    ["Term", "12 months"],
-                    ["Rate (from)", "9.99%"],
-                    ["LTV", "Up to 75%"],
+                    ["Covers", "Purchase + full rehab"],
+                    ["Loan cap", "80% of after-repair value"],
+                    ["You bring", "10%+ down payment"],
+                    ["Rehab funds", "Staged draws, as work verifies"],
+                    ["Early payoff", "Anytime — no penalty"],
                   ].map(([k, v]) => (
                     <div
                       key={k}
-                      className="flex justify-between items-center pb-3 border-b border-teal/10 last:border-0"
+                      className="flex justify-between items-center gap-4 pb-3 border-b border-teal/10 last:border-0"
                     >
-                      <span className="text-teal/60 text-sm">{k}</span>
-                      <span className="text-teal font-semibold">{v}</span>
+                      <span className="text-teal/60 text-sm flex-shrink-0">{k}</span>
+                      <span className="text-teal font-semibold text-right">{v}</span>
                     </div>
                   ))}
                 </div>
@@ -105,7 +112,7 @@ export default function Hero() {
                 <div className="mt-6 p-4 rounded-xl bg-teal/5">
                   <div className="flex items-center gap-2 text-teal text-sm">
                     <span className="w-2 h-2 rounded-full bg-bronze animate-pulse" />
-                    Pre-qualification in under 5 minutes
+                    Terms quoted per deal — it costs nothing to hear them
                   </div>
                 </div>
               </div>
@@ -114,13 +121,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-cream/40 text-xs tracking-widest">
-        <div className="flex flex-col items-center gap-2">
-          <span>SCROLL</span>
-          <span className="w-px h-10 bg-gradient-to-b from-bronze to-transparent" />
-        </div>
-      </div>
     </section>
   );
 }

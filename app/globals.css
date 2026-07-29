@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --teal: #21413A;
-  --teal-dark: #1a2f29;
-  --cream: #F3EDE1;
-  --cream-light: #f9f6f2;
-  --bronze: #C9962F;
+  --teal: #1E3C36;
+  --teal-dark: #16302B;
+  --cream: #F0EADE;
+  --cream-light: #F8F4EB;
+  --bronze: #C89430;
 }
 
 html {
@@ -47,7 +47,7 @@ body {
   display: inline-block;
   width: 64px;
   height: 3px;
-  background: linear-gradient(90deg, var(--bronze), #e0b958);
+  background: linear-gradient(90deg, var(--bronze), #D5A94A);
   border-radius: 2px;
 }
 
@@ -88,12 +88,12 @@ body {
   letter-spacing: 0.02em;
   border-radius: 999px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 24px -10px rgba(201, 150, 47, 0.6);
+  box-shadow: 0 8px 24px -10px rgba(200, 148, 48, 0.6);
 }
 .btn-primary:hover {
-  background: #d9ad4a;
+  background: #D5A94A;
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px -10px rgba(201, 150, 47, 0.7);
+  box-shadow: 0 14px 30px -10px rgba(200, 148, 48, 0.7);
 }
 
 .btn-ghost {
@@ -101,7 +101,7 @@ body {
   align-items: center;
   gap: 0.6rem;
   padding: 0.95rem 1.8rem;
-  border: 1px solid rgba(243, 237, 225, 0.25);
+  border: 1px solid rgba(240, 234, 222, 0.25);
   color: var(--cream);
   font-weight: 500;
   border-radius: 999px;
@@ -117,7 +117,7 @@ body {
   background: white;
   border-radius: 20px;
   padding: 2rem;
-  border: 1px solid rgba(33, 65, 58, 0.06);
+  border: 1px solid rgba(30, 60, 54, 0.06);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -129,15 +129,15 @@ body {
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, var(--bronze), #e0b958);
+  background: linear-gradient(90deg, var(--bronze), #D5A94A);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.5s ease;
 }
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 30px 60px -25px rgba(33, 65, 58, 0.25);
-  border-color: rgba(201, 150, 47, 0.3);
+  box-shadow: 0 30px 60px -25px rgba(30, 60, 54, 0.25);
+  border-color: rgba(200, 148, 48, 0.3);
 }
 .card:hover::before {
   transform: scaleX(1);
@@ -156,7 +156,8 @@ body {
 .container-x {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 /* Reveal animation utility */

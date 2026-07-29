@@ -1,24 +1,37 @@
-import { Poppins } from "next/font/google";
 import "./globals.css";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-  display: "swap",
-});
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Lazy Dog Capital — Hard Money Lending Made Simple",
+  title: "Lazy Dog Capital — Fix & Flip Lending in Dallas–Fort Worth",
   description:
-    "Fast, flexible private capital for real estate investors. Fix-and-flip, bridge, ground-up construction, and rental DSCR loans nationwide.",
-  themeColor: "#21413A",
+    "Short-term private capital for fix & flip investors in Dallas–Fort Worth. One loan covers purchase and rehab, with staged draws and no prepayment penalty. Run by operators with 800+ deals behind them.",
+};
+
+export const viewport = {
+  themeColor: "#1E3C36",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={poppins.variable}>
-      <body className="font-sans">{children}</body>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="font-sans">
+        <Navbar />
+        <main className="overflow-x-hidden">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
