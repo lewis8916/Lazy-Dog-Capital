@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-screen flex items-center overflow-hidden noise"
+      className="relative overflow-hidden noise"
       style={{
         background:
           "radial-gradient(ellipse at top left, #2a5249 0%, #1E3C36 45%, #16302B 100%)",
@@ -18,7 +18,7 @@ export default function Hero() {
       <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full border border-bronze/20" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-bronze/5 blur-3xl" />
 
-      <div className="container-x relative z-10 pt-32 pb-20">
+      <div className="container-x relative z-10 pt-32 pb-24">
         <div className="grid md:grid-cols-12 gap-12 items-center">
           <div className="md:col-span-7 animate-fade-up">
             <div className="flex items-center gap-3 mb-7">
