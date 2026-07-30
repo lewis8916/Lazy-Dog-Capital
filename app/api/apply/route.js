@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { renderApplicationEmail } from "@/lib/applicationEmail";
+import { guardRequest } from "@/lib/spamGuard";
 
 // Fields that must be present for an application to be actionable.
 const REQUIRED = [
@@ -49,6 +50,9 @@ export async function POST(request) {
   } catch {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
+
+  const blocked = guardRequest(request, data, "apply");
+  if (blocked) return blocked;
 
   const missing = REQUIRED.filter((k) => !String(data?.[k] ?? "").trim());
   if (missing.length) {

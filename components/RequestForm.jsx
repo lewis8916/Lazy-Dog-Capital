@@ -4,10 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Info, Loader2 } from "lucide-react";
 import { allFields } from "@/lib/requestForms";
+import Honeypot from "@/components/Honeypot";
 import { formatMoney } from "@/lib/dealMath";
 
 export default function RequestForm({ schema }) {
   const [values, setValues] = useState({});
+  const [hp, setHp] = useState("");
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
   const [serverError, setServerError] = useState("");
@@ -54,7 +56,7 @@ export default function RequestForm({ schema }) {
       const res = await fetch(schema.endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, ldc_hp: hp }),
       });
       if (!res.ok) throw new Error((await res.json()).error || "Submission failed");
       setStatus("success");
@@ -96,6 +98,7 @@ export default function RequestForm({ schema }) {
 
       <div className="bg-cream rounded-3xl p-7 sm:p-9 shadow-xl border border-teal/5">
         <form onSubmit={submit} className="space-y-10">
+          <Honeypot value={hp} onChange={setHp} />
           {schema.sections.map((section) => (
             <section key={section.heading}>
               <div className="flex items-center gap-3 mb-6">

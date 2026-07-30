@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Honeypot from "@/components/Honeypot";
 import {
   ArrowLeft,
   ArrowRight,
@@ -31,6 +32,7 @@ const money = (v) => {
 export default function LoanApplicationForm() {
   const [step, setStep] = useState(0);
   const [values, setValues] = useState({ projects: [emptyProjectRow()] });
+  const [hp, setHp] = useState("");
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
   const [serverError, setServerError] = useState("");
@@ -117,7 +119,7 @@ export default function LoanApplicationForm() {
       const res = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, ldc_hp: hp }),
       });
       if (!res.ok) throw new Error((await res.json()).error || "Submission failed");
       setStatus("success");
@@ -198,6 +200,7 @@ export default function LoanApplicationForm() {
       </div>
 
       <form onSubmit={step === STEPS.length - 1 ? submit : (e) => e.preventDefault()}>
+        <Honeypot value={hp} onChange={setHp} />
         {step < 3 ? (
           <div className="space-y-12">
             {current.sections.map((sec) => (

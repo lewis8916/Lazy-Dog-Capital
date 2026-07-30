@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Info, Loader2, Plus, X } from "lucide-react";
 import { DRAW_REQUEST, computeDraw } from "@/lib/requestForms";
+import Honeypot from "@/components/Honeypot";
 import { formatMoney, usd } from "@/lib/dealMath";
 import FileUpload, {
   MAX_TOTAL_BYTES,
@@ -49,6 +50,7 @@ const UPLOAD_HINTS = [
 export default function DrawRequestForm() {
   const [v, setV] = useState(initial);
   const [uploads, setUploads] = useState({ 0: [], 1: [], 2: [] });
+  const [hp, setHp] = useState("");
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
   const [serverError, setServerError] = useState("");
@@ -135,7 +137,7 @@ export default function DrawRequestForm() {
       const res = await fetch(DRAW_REQUEST.endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...v, attachments }),
+        body: JSON.stringify({ ...v, attachments, ldc_hp: hp }),
       });
       if (!res.ok) throw new Error((await res.json()).error || "Submission failed");
       setStatus("success");
@@ -184,6 +186,7 @@ export default function DrawRequestForm() {
 
       <div className="bg-cream rounded-3xl p-7 sm:p-9 shadow-xl border border-teal/5">
         <form onSubmit={submit} className="space-y-10">
+          <Honeypot value={hp} onChange={setHp} />
           {/* Header */}
           <Section heading="Construction Draw Request">
             <div className="grid sm:grid-cols-2 gap-5">

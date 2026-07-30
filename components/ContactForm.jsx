@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Honeypot from "@/components/Honeypot";
 import {
   ArrowRight,
   CheckCircle2,
@@ -31,6 +32,7 @@ const initial = {
 
 export default function ContactForm() {
   const [form, setForm] = useState(initial);
+  const [hp, setHp] = useState("");
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
   const [serverError, setServerError] = useState("");
@@ -62,7 +64,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, ldc_hp: hp }),
       });
       if (!res.ok) throw new Error((await res.json()).error || "Submission failed");
       setStatus("success");
@@ -114,6 +116,7 @@ export default function ContactForm() {
       <div className="lg:col-span-3">
         <div className="bg-cream rounded-3xl p-7 sm:p-8 shadow-xl border border-teal/5">
           <form onSubmit={submit} className="space-y-6">
+            <Honeypot value={hp} onChange={setHp} />
             <div className="flex items-center gap-3">
               <span className="bronze-bar !w-8" />
               <h3 className="eyebrow text-bronze">Send Us A Note</h3>

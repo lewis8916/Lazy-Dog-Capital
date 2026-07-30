@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { renderDealEmail } from "@/lib/dealEmail";
+import { guardRequest } from "@/lib/spamGuard";
 
 const REQUIRED = ["name", "phone", "email", "address", "price", "rehab", "arv"];
 
@@ -11,6 +12,9 @@ export async function POST(request) {
   } catch {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
+
+  const blocked = guardRequest(request, data, "submit-deal");
+  if (blocked) return blocked;
 
   const missing = REQUIRED.filter((k) => !String(data?.[k] ?? "").trim());
   if (missing.length) {

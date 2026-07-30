@@ -2,10 +2,48 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+const SITE_URL = "https://lazydogcapital.com";
+const TITLE = "Lazy Dog Capital — Fix & Flip Lending in Dallas–Fort Worth";
+const DESCRIPTION =
+  "Short-term private capital for fix & flip investors in Dallas–Fort Worth. One loan covers purchase and rehab, with staged draws and no prepayment penalty. Run by operators with 800+ deals behind them.";
+
 export const metadata = {
-  title: "Lazy Dog Capital — Fix & Flip Lending in Dallas–Fort Worth",
-  description:
-    "Short-term private capital for fix & flip investors in Dallas–Fort Worth. One loan covers purchase and rehab, with staged draws and no prepayment penalty. Run by operators with 800+ deals behind them.",
+  // Required for Open Graph image URLs to resolve to absolute paths.
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: "%s — Lazy Dog Capital",
+  },
+  description: DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Lazy Dog Capital",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    locale: "en_US",
+    images: [
+      {
+        url: "/icon.png",
+        width: 512,
+        height: 512,
+        alt: "Lazy Dog Capital",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/icon.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export const viewport = {

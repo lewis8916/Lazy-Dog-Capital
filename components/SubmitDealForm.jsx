@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, CheckCircle2, Loader2, Calculator } from "lucide-react";
 import { computeDeal, formatMoney as money, parseMoney } from "@/lib/dealMath";
+import Honeypot from "@/components/Honeypot";
 
 const initial = {
   name: "",
@@ -33,6 +34,7 @@ export default function SubmitDealForm() {
   const [prefilled] = useState(
     () => !!(params.get("price") || params.get("arv"))
   );
+  const [hp, setHp] = useState("");
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
   const [serverError, setServerError] = useState("");
@@ -75,7 +77,7 @@ export default function SubmitDealForm() {
       const res = await fetch("/api/submit-deal", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, ldc_hp: hp }),
       });
       if (!res.ok) throw new Error((await res.json()).error || "Submission failed");
       setStatus("success");
@@ -127,6 +129,7 @@ export default function SubmitDealForm() {
 
       <div className="bg-cream rounded-3xl p-8 sm:p-10 shadow-xl border border-teal/5">
         <form onSubmit={submit} className="space-y-10">
+          <Honeypot value={hp} onChange={setHp} />
           {/* Contact */}
           <section>
             <div className="flex items-center gap-3 mb-6">
