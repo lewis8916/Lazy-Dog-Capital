@@ -1,6 +1,6 @@
 "use client";
 
-import { Hammer, Eye, HandCoins, Wrench, MapPin, Sprout } from "lucide-react";
+import { Hammer, Eye, HandCoins, MapPin, Sprout } from "lucide-react";
 
 const benefits = [
   {
@@ -17,11 +17,6 @@ const benefits = [
     icon: HandCoins,
     title: "Our Own Money in Every Deal",
     desc: "We put our own capital into every loan we fund. When your flip succeeds, we succeed — that's the business model, not a favor.",
-  },
-  {
-    icon: Wrench,
-    title: "In-House Crews",
-    desc: "We own a repair company and a property management company. If a job gets complicated, you're talking to people who've solved it hundreds of times.",
   },
   {
     icon: Sprout,
@@ -63,20 +58,25 @@ export default function WhyChooseUs({ standalone = false }) {
           </h2>
           <p className="text-cream/70 text-lg leading-relaxed">
             Lazy Dog Capital is run by two Dallas–Fort Worth investors —
-            Lewis McKnight and Stephen Maner — with 800+ deals, in-house
-            construction crews, and 23 years in this market behind them.
+            Lewis McKnight and Stephen Maner — with 800+ deals and 23 years
+            in this market behind them.
             Plenty of lenders will run your deal through a spreadsheet.
-            We've spent decades doing exactly what you're about to do.
+            We&apos;ve spent decades doing exactly what you&apos;re about to do.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-cream/10 border border-cream/10 rounded-3xl overflow-hidden">
-          {benefits.map((b) => {
+          {benefits.map((b, i) => {
             const Icon = b.icon;
+            // Odd card count would leave a hole in the last row — let the final
+            // card widen to close it.
+            const fillsRow = i === benefits.length - 1 && benefits.length % 2 !== 0;
             return (
               <div
                 key={b.title}
-                className="bg-teal p-8 group hover:bg-teal-dark transition-colors"
+                className={`bg-teal p-8 group hover:bg-teal-dark transition-colors ${
+                  fillsRow ? "md:col-span-2" : ""
+                }`}
               >
                 <div className="w-12 h-12 rounded-xl bg-bronze/10 flex items-center justify-center mb-5 group-hover:bg-bronze/20 transition-colors">
                   <Icon size={22} className="text-bronze" />

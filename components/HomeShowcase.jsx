@@ -16,7 +16,7 @@ const cards = [
     icon: Hammer,
     kicker: "Why Lazy Dog",
     title: "Lenders who've swung the hammer",
-    desc: "800+ deals, in-house crews, and 23 years in DFW real estate. We read your project like builders, not bankers.",
+    desc: "800+ deals and 23 years in DFW real estate. We read your project like builders, not bankers.",
     href: "/why",
     cta: "Meet the operators",
   },
