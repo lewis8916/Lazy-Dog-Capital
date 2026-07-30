@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import logoIcon from "@/public/logo_icon.png";
+import logoReversed from "@/public/logo_reversed.png";
 
 export default function Footer() {
   return (
@@ -18,7 +20,7 @@ export default function Footer() {
 
       {/* Watermark dog icon */}
       <img
-        src="/logo_icon.png"
+        src={logoIcon.src}
         alt=""
         aria-hidden="true"
         className="absolute -right-10 top-1/2 -translate-y-1/2 w-[380px] opacity-[0.04] pointer-events-none select-none"
@@ -30,7 +32,7 @@ export default function Footer() {
           <div className="md:col-span-6">
             <Link href="/" className="inline-block mb-7">
               <img
-                src="/logo_reversed.png"
+                src={logoReversed.src}
                 alt="Lazy Dog Capital"
                 className="h-16 w-auto"
               />

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
+import logoReversed from "@/public/logo_reversed.png";
 
 const resources = [
   { href: "/resources/draw-request", label: "Draw Request" },
@@ -71,7 +72,7 @@ export default function Navbar() {
       <div className="container-x flex items-center justify-between py-5">
         <Link href="/" className="flex items-center">
           <img
-            src="/logo_reversed.png"
+            src={logoReversed.src}
             alt="Lazy Dog Capital"
             className="h-12 w-auto"
           />

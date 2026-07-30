@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import logoIcon from "@/public/logo_icon.png";
 
 export default function Hero() {
   return (
@@ -97,7 +98,7 @@ export default function Hero() {
                     </div>
                   </div>
                   <img
-                    src="/logo_icon.png"
+                    src={logoIcon.src}
                     alt="Lazy Dog Capital"
                     className="w-12 h-auto"
                   />
