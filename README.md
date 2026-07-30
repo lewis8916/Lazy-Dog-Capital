@@ -26,6 +26,14 @@ npm run dev
 
 Open http://localhost:3000.
 
+## Deployment
+
+Live at https://lazydogcapital.com — push to `main` and Hostinger auto-deploys.
+
+See **[DEPLOYMENT.md](DEPLOYMENT.md)** before changing environment variables,
+adding images, or touching email. There are three host-specific gotchas
+documented there that are not obvious from the code.
+
 ## Structure
 ```
 app/
