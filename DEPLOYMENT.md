@@ -127,6 +127,39 @@ curl -s -X POST -H "Content-Type: application/json" \
 `"emailed":true` is the only proof. A `502` means the key loaded but Resend
 rejected it — which is different, and better, than `emailed:false`.
 
+## Form spam protection
+
+`lib/spamGuard.js` runs on all five endpoints before validation.
+
+**Rate limiting is the real protection.** 10 submissions per IP per 10 minutes
+across all forms, keyed on `cf-connecting-ip` (verified present — Cloudflare
+fronts the site). In-memory, so it resets on every redeploy.
+
+It **fails open**: if no header identifies the caller, the limit is skipped
+rather than falling back to a shared key. An earlier version used the string
+`"unknown"` as a fallback, which would have keyed every visitor to one bucket
+and locked out the whole site at once.
+
+**The honeypot logs but does not block.** It originally returned a fake success
+when the hidden `ldc_hp` field was filled — and silently discarded a real
+contact submission, because a password manager populated the field despite the
+deliberately odd name, `autocomplete="off"` and `tabIndex={-1}`. The sender saw
+a success message and nothing arrived.
+
+> Do not make the honeypot blocking again without a mechanism autofill cannot
+> trigger. A hidden **checkbox** is the safe version — password managers do not
+> tick checkboxes, but naive form-filling bots do. Losing one loan application
+> costs far more than the spam a honeypot prevents.
+
+### Testing note
+
+`curl` from a machine on the same network as the site owner **shares their IP**,
+so test traffic consumes the owner's rate-limit allowance. This looked like a
+shared-bucket bug once and was not. Redeploying clears the counter.
+
+Direct API calls also **do not send the honeypot field**, so they cannot
+reproduce browser-only failures. Verify form changes from a real browser.
+
 ## Outstanding
 
 - **`next@14.2.5` has a known security vulnerability** (flagged in every build
