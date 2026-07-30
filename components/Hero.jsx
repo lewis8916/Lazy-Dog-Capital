@@ -44,11 +44,23 @@ export default function Hero() {
               closes at the speed the deal requires.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="/apply" className="btn-primary">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
+              <Link
+                href="/submit-deal"
+                className="btn-primary sm:col-span-2 justify-center whitespace-nowrap"
+              >
+                Submit a Deal <ArrowRight size={18} />
+              </Link>
+              <Link
+                href="/apply"
+                className="btn-ghost justify-center whitespace-nowrap !px-5"
+              >
                 Start Your Application <ArrowRight size={18} />
               </Link>
-              <Link href="/loan" className="btn-ghost">
+              <Link
+                href="/loan"
+                className="btn-ghost justify-center whitespace-nowrap !px-5"
+              >
                 How the loan works <ArrowRight size={16} />
               </Link>
             </div>

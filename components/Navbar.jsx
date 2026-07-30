@@ -9,7 +9,7 @@ const links = [
   { href: "/loan", label: "The Loan" },
   { href: "/why", label: "Why Us" },
   { href: "/faq", label: "FAQ" },
-  { href: "/apply", label: "Apply" },
+  { href: "/apply", label: "Contact Us" },
 ];
 
 export default function Navbar() {
@@ -61,10 +61,10 @@ export default function Navbar() {
             </Link>
           ))}
           <Link
-            href="/apply"
+            href="/submit-deal"
             className="px-5 py-2.5 rounded-full bg-bronze text-cream text-base font-semibold hover:bg-bronze-light transition-all shadow-lg shadow-bronze/30"
           >
-            Get Funded
+            Submit a Deal
           </Link>
         </nav>
 
@@ -94,10 +94,10 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
-              href="/apply"
+              href="/submit-deal"
               className="mt-2 inline-block px-5 py-3 text-center rounded-full bg-bronze text-cream font-semibold"
             >
-              Get Funded
+              Submit a Deal
             </Link>
           </div>
         </div>

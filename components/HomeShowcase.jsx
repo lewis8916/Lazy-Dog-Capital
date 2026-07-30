@@ -113,7 +113,10 @@ export default function HomeShowcase() {
             </div>
 
             <div className="flex flex-col sm:flex-row lg:flex-col gap-4 flex-shrink-0">
-              <Link href="/apply" className="btn-primary justify-center">
+              <Link href="/submit-deal" className="btn-primary justify-center">
+                Submit a Deal <ArrowRight size={18} />
+              </Link>
+              <Link href="/apply" className="btn-ghost justify-center">
                 Start Your Application <ArrowRight size={18} />
               </Link>
               <Link href="/faq" className="btn-ghost justify-center">
