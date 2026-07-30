@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { ArrowRight, CheckCircle2, Loader2, Calculator } from "lucide-react";
 import { computeDeal, formatMoney as money, parseMoney } from "@/lib/dealMath";
 
 const initial = {
@@ -19,7 +20,19 @@ const initial = {
 };
 
 export default function SubmitDealForm() {
-  const [form, setForm] = useState(initial);
+  const params = useSearchParams();
+
+  // Numbers handed over from the deal calculator, if they came from there.
+  const [form, setForm] = useState(() => ({
+    ...initial,
+    price: money(params.get("price") || ""),
+    rehab: money(params.get("rehab") || ""),
+    arv: money(params.get("arv") || ""),
+    months: (params.get("months") || "").replace(/[^\d]/g, ""),
+  }));
+  const [prefilled] = useState(
+    () => !!(params.get("price") || params.get("arv"))
+  );
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
   const [serverError, setServerError] = useState("");
@@ -97,6 +110,21 @@ export default function SubmitDealForm() {
 
   return (
     <div className="max-w-3xl mx-auto">
+      {prefilled && (
+        <div className="mb-6 flex items-start gap-4 p-5 rounded-2xl bg-bronze/10 border border-bronze/25">
+          <Calculator size={20} className="text-bronze flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-teal font-semibold">
+              Your numbers came over from the calculator.
+            </p>
+            <p className="text-teal/60 text-sm mt-1 leading-relaxed">
+              Add how to reach you and the property address, and you&apos;re done.
+              Everything below is still editable.
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="bg-cream rounded-3xl p-8 sm:p-10 shadow-xl border border-teal/5">
         <form onSubmit={submit} className="space-y-10">
           {/* Contact */}

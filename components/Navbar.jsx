@@ -8,7 +8,7 @@ import { Menu, X } from "lucide-react";
 const links = [
   { href: "/loan", label: "The Loan" },
   { href: "/why", label: "Why Us" },
-  { href: "/deal-calculator", label: "Deal Calculator" },
+  { href: "/deal-calculator", label: "Calculator" },
   { href: "/faq", label: "FAQ" },
   { href: "/apply", label: "Contact Us" },
 ];

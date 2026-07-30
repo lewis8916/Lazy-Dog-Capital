@@ -19,157 +19,149 @@ export default function DealCalculator() {
   const d = computeDeal(form);
   const dirty = Object.values(form).some((v) => String(v).trim() !== "");
 
+  // Carry the numbers over so Submit a Deal only needs their contact details.
+  // Deal figures only — nothing personally identifying goes in the URL.
+  const handoff = new URLSearchParams();
+  if (d.price) handoff.set("price", String(d.price));
+  if (d.rehab) handoff.set("rehab", String(d.rehab));
+  if (d.arv) handoff.set("arv", String(d.arv));
+  if (String(form.months).trim()) handoff.set("months", String(form.months).trim());
+  const submitHref = `/submit-deal?${handoff.toString()}`;
+
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="grid lg:grid-cols-5 gap-6">
-        {/* Inputs */}
-        <div className="lg:col-span-2">
-          <div className="bg-cream rounded-3xl p-7 shadow-xl border border-teal/5 lg:sticky lg:top-28">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
-                <span className="bronze-bar !w-8" />
-                <h3 className="eyebrow text-bronze">The Numbers</h3>
-              </div>
-              {dirty && (
-                <button
-                  type="button"
-                  onClick={() => setForm(initial)}
-                  className="text-teal/40 hover:text-bronze transition-colors"
-                  aria-label="Reset calculator"
-                  title="Reset"
-                >
-                  <RotateCcw size={16} />
-                </button>
-              )}
-            </div>
-
-            <div className="space-y-5">
-              <Field
-                label="Purchase price"
-                money
-                value={form.price}
-                onChange={set("price")}
-                placeholder="310,000"
-              />
-              <Field
-                label="Rehab budget"
-                money
-                value={form.rehab}
-                onChange={set("rehab")}
-                placeholder="78,000"
-              />
-              <Field
-                label="Value after repairs"
-                hint="What it sells for finished"
-                money
-                value={form.arv}
-                onChange={set("arv")}
-                placeholder="465,000"
-              />
-              <Field
-                label="Months to complete"
-                type="number"
-                value={form.months}
-                onChange={set("months")}
-                placeholder="5"
-              />
-            </div>
+    <div className="max-w-3xl mx-auto space-y-5">
+      {/* Inputs — one full-width band, fields side by side */}
+      <div className="bg-cream rounded-3xl p-7 sm:p-8 shadow-xl border border-teal/5">
+        <div className="flex items-center justify-between mb-7">
+          <div className="flex items-center gap-3">
+            <span className="bronze-bar !w-8" />
+            <h3 className="eyebrow text-bronze">The Numbers</h3>
           </div>
-        </div>
-
-        {/* Results */}
-        <div className="lg:col-span-3">
-          {!d.ready ? (
-            <div className="h-full min-h-[380px] rounded-3xl border-2 border-dashed border-teal/15 flex items-center justify-center p-10 text-center">
-              <div>
-                <div className="text-teal/30 text-5xl font-bold mb-4">$</div>
-                <p className="text-teal/50 leading-relaxed max-w-xs">
-                  Enter a purchase price and what the house is worth finished.
-                  The numbers update as you type.
-                </p>
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {/* Headline verdict */}
-              <div
-                className="relative overflow-hidden rounded-3xl noise p-8"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at top right, #2a5249 0%, #1E3C36 55%, #16302B 100%)",
-                }}
-              >
-                <div className="absolute -top-20 -right-20 w-[240px] h-[240px] rounded-full border border-bronze/20" />
-                <div className="relative z-10">
-                  <div className="eyebrow text-bronze mb-3">Rough Fit</div>
-                  <div
-                    className={`display text-4xl sm:text-5xl mb-3 ${
-                      d.inRange ? "text-cream" : "text-bronze"
-                    }`}
-                  >
-                    {d.inRange ? "In range." : "Tight."}
-                  </div>
-                  <p className="text-cream/70 leading-relaxed max-w-md">
-                    The loan you&apos;d need is{" "}
-                    <strong className="text-cream">
-                      {usd(Math.abs(d.headroom))}
-                    </strong>{" "}
-                    {d.inRange ? "under" : "over"} 80% of your after-repair value.
-                  </p>
-                </div>
-              </div>
-
-              {/* Breakdown */}
-              <div className="bg-cream rounded-3xl p-7 shadow-xl border border-teal/5">
-                <div className="grid grid-cols-2 gap-5 mb-6">
-                  <Stat label="Your 10% down" value={usd(d.down)} />
-                  <Stat label="Loan you'd need" value={usd(d.loanNeeded)} accent />
-                  <Stat label="80% of your ARV" value={usd(d.cap)} />
-                  <Stat
-                    label={d.inRange ? "Room to spare" : "Over by"}
-                    value={usd(Math.abs(d.headroom))}
-                    tone={d.inRange ? "good" : "warn"}
-                  />
-                </div>
-
-                <div className="pt-6 border-t border-teal/10 grid grid-cols-2 gap-5">
-                  <Stat label="Total project cost" value={usd(d.totalCost)} />
-                  <Stat
-                    label="Spread over cost"
-                    value={`${usd(d.spread)}${
-                      d.arv ? ` · ${d.marginPct}%` : ""
-                    }`}
-                    tone={d.spread > 0 ? "good" : "warn"}
-                  />
-                </div>
-
-                <div className="mt-6 pt-5 border-t border-teal/10">
-                  <p className="text-bronze font-bold text-base sm:text-lg leading-snug">
-                    Tight doesn&apos;t mean no — we make tight deals work.
-                  </p>
-                  <p className="text-teal/50 text-xs mt-2 leading-relaxed">
-                    A rough guide only. We size every loan on our own review of the
-                    property and the comps — send it either way.
-                  </p>
-                </div>
-              </div>
-
-              {/* CTA */}
-              <div className="flex flex-wrap items-center gap-4">
-                <Link href="/submit-deal" className="btn-primary">
-                  Submit this deal <ArrowRight size={18} />
-                </Link>
-                <Link
-                  href="/faq"
-                  className="text-bronze font-semibold hover:underline"
-                >
-                  How we size loans
-                </Link>
-              </div>
-            </div>
+          {dirty && (
+            <button
+              type="button"
+              onClick={() => setForm(initial)}
+              className="inline-flex items-center gap-2 text-teal/40 hover:text-bronze transition-colors text-xs font-semibold uppercase tracking-widest"
+              aria-label="Reset calculator"
+            >
+              <RotateCcw size={14} /> Reset
+            </button>
           )}
         </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 items-end">
+          <Field
+            label="Purchase price"
+            money
+            value={form.price}
+            onChange={set("price")}
+            placeholder="310,000"
+          />
+          <Field
+            label="Rehab budget"
+            money
+            value={form.rehab}
+            onChange={set("rehab")}
+            placeholder="78,000"
+          />
+          <Field
+            label="Value after repairs"
+            hint="What it sells for finished"
+            money
+            value={form.arv}
+            onChange={set("arv")}
+            placeholder="465,000"
+          />
+          <Field
+            label="Months to complete"
+            type="number"
+            value={form.months}
+            onChange={set("months")}
+            placeholder="5"
+          />
+        </div>
       </div>
+
+      {!d.ready ? (
+        <div className="rounded-3xl border-2 border-dashed border-teal/15 flex items-center justify-center py-16 px-10 text-center">
+          <div>
+            <div className="text-teal/25 text-5xl font-bold mb-4">$</div>
+            <p className="text-teal/50 leading-relaxed max-w-sm">
+              Enter a purchase price and what the house is worth finished. The
+              numbers update as you type.
+            </p>
+          </div>
+        </div>
+      ) : (
+        <>
+          {/* Verdict — full-width band */}
+          <div
+            className="relative overflow-hidden rounded-3xl noise p-8 sm:px-10 sm:py-9"
+            style={{
+              background:
+                "radial-gradient(ellipse at top right, #2a5249 0%, #1E3C36 55%, #16302B 100%)",
+            }}
+          >
+            <div className="absolute -top-24 -right-16 w-[280px] h-[280px] rounded-full border border-bronze/20" />
+            <div className="absolute -bottom-32 -left-10 w-[300px] h-[300px] rounded-full bg-bronze/5 blur-3xl" />
+            <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div>
+                <div className="eyebrow text-bronze mb-3">Rough Fit</div>
+                <div
+                  className={`display text-4xl sm:text-5xl ${
+                    d.inRange ? "text-cream" : "text-bronze"
+                  }`}
+                >
+                  {d.inRange ? "In range." : "Tight."}
+                </div>
+              </div>
+              <p className="text-cream/70 leading-relaxed sm:text-right sm:max-w-xs">
+                The loan you&apos;d need is{" "}
+                <strong className="text-cream">{usd(Math.abs(d.headroom))}</strong>{" "}
+                {d.inRange ? "under" : "over"} 80% of your after-repair value.
+              </p>
+            </div>
+          </div>
+
+          {/* Breakdown — all six across on wide screens */}
+          <div className="bg-cream rounded-3xl p-7 sm:p-8 shadow-xl border border-teal/5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-7">
+              <Stat label="Your 10% down" value={usd(d.down)} />
+              <Stat label="Loan you'd need" value={usd(d.loanNeeded)} accent />
+              <Stat label="80% of your ARV" value={usd(d.cap)} />
+              <Stat
+                label={d.inRange ? "Room to spare" : "Over by"}
+                value={usd(Math.abs(d.headroom))}
+                tone={d.inRange ? "good" : "warn"}
+              />
+              <Stat label="Total project cost" value={usd(d.totalCost)} />
+              <Stat
+                label="Spread over cost"
+                value={`${usd(d.spread)}${d.arv ? ` · ${d.marginPct}%` : ""}`}
+                tone={d.spread > 0 ? "good" : "warn"}
+              />
+            </div>
+
+            <div className="mt-7 pt-6 border-t border-teal/10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+              <div>
+                <p className="text-bronze font-bold text-base sm:text-lg leading-snug">
+                  Tight doesn&apos;t mean no — we make tight deals work.
+                </p>
+                <p className="text-teal/50 text-xs mt-2 leading-relaxed max-w-xl">
+                  A rough guide only. We size every loan on our own review of the
+                  property and the comps — send it either way.
+                </p>
+              </div>
+              <Link
+                href={submitHref}
+                className="btn-primary flex-shrink-0 whitespace-nowrap"
+              >
+                Submit this deal <ArrowRight size={18} />
+              </Link>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

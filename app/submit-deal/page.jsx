@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import SubmitDealForm from "@/components/SubmitDealForm";
 import PageHeader from "@/components/PageHeader";
 
@@ -17,7 +18,13 @@ export default function SubmitDealPage() {
       />
       <section className="section bg-cream-light">
         <div className="container-x">
-          <SubmitDealForm />
+          <Suspense
+            fallback={
+              <div className="max-w-3xl mx-auto h-96 rounded-3xl bg-cream animate-pulse" />
+            }
+          >
+            <SubmitDealForm />
+          </Suspense>
         </div>
       </section>
     </>
