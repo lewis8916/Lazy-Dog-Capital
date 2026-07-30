@@ -8,6 +8,7 @@ import { Menu, X } from "lucide-react";
 const links = [
   { href: "/loan", label: "The Loan" },
   { href: "/why", label: "Why Us" },
+  { href: "/deal-calculator", label: "Deal Calculator" },
   { href: "/faq", label: "FAQ" },
   { href: "/apply", label: "Contact Us" },
 ];
@@ -46,12 +47,12 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-9">
+        <nav className="hidden lg:flex items-center gap-7">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`text-base font-medium transition-colors ${
+              className={`text-base font-medium whitespace-nowrap transition-colors ${
                 pathname === l.href
                   ? "text-bronze"
                   : "text-cream/80 hover:text-bronze"
@@ -62,14 +63,14 @@ export default function Navbar() {
           ))}
           <Link
             href="/submit-deal"
-            className="px-5 py-2.5 rounded-full bg-bronze text-cream text-base font-semibold hover:bg-bronze-light transition-all shadow-lg shadow-bronze/30"
+            className="px-5 py-2.5 rounded-full bg-bronze text-cream text-base font-semibold whitespace-nowrap hover:bg-bronze-light transition-all shadow-lg shadow-bronze/30"
           >
             Submit a Deal
           </Link>
         </nav>
 
         <button
-          className="md:hidden text-cream"
+          className="lg:hidden text-cream"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -78,7 +79,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden bg-teal-dark border-t border-cream/10">
+        <div className="lg:hidden bg-teal-dark border-t border-cream/10">
           <div className="container-x py-6 flex flex-col gap-4">
             {links.map((l) => (
               <Link

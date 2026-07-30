@@ -3,11 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
-
-const money = (v) => {
-  const digits = String(v).replace(/[^\d]/g, "");
-  return digits ? Number(digits).toLocaleString("en-US") : "";
-};
+import { computeDeal, formatMoney as money, parseMoney } from "@/lib/dealMath";
 
 const initial = {
   name: "",
@@ -35,13 +31,11 @@ export default function SubmitDealForm() {
     if (errors[k]) setErrors((x) => ({ ...x, [k]: null }));
   };
 
-  const num = (v) => Number(String(v).replace(/[^\d]/g, "")) || 0;
+  const num = parseMoney;
 
-  // Live sanity check against the 80%-of-ARV cap.
-  const arv = num(form.arv);
-  const totalCost = num(form.price) + num(form.rehab);
-  const cap = Math.round(arv * 0.8);
-  const showCheck = arv > 0 && totalCost > 0;
+  // Live sanity check against the 80%-of-ARV cap — same math the deal
+  // calculator and the notification email use.
+  const { down, loanNeeded, cap, inRange, ready: showCheck } = computeDeal(form);
 
   const validate = () => {
     const e = {};
@@ -223,13 +217,21 @@ export default function SubmitDealForm() {
 
             {showCheck && (
               <div className="mt-6 p-5 rounded-2xl bg-teal/5 border border-teal/10">
-                <div className="grid sm:grid-cols-3 gap-4 text-sm">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
                   <div>
                     <div className="text-[10px] tracking-widest uppercase text-teal/50 mb-1">
-                      Your total cost
+                      Your 10% down
                     </div>
                     <div className="text-teal font-bold text-lg">
-                      ${totalCost.toLocaleString("en-US")}
+                      ${down.toLocaleString("en-US")}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[10px] tracking-widest uppercase text-teal/50 mb-1">
+                      Loan you&apos;d need
+                    </div>
+                    <div className="text-teal font-bold text-lg">
+                      ${loanNeeded.toLocaleString("en-US")}
                     </div>
                   </div>
                   <div>
@@ -246,10 +248,10 @@ export default function SubmitDealForm() {
                     </div>
                     <div
                       className={`font-bold text-lg ${
-                        totalCost <= cap ? "text-bronze" : "text-red-600"
+                        inRange ? "text-bronze" : "text-red-600"
                       }`}
                     >
-                      {totalCost <= cap ? "In range" : "Tight"}
+                      {inRange ? "In range" : "Tight"}
                     </div>
                   </div>
                 </div>
