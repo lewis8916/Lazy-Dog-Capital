@@ -37,12 +37,17 @@ export async function POST(request) {
       subject,
       html,
       text,
+      attachments: (data.attachments || []).map((a) => ({
+        filename: a.filename,
+        content: a.content,
+      })),
     });
 
     if (error) throw new Error(error.message || "Resend rejected the message");
 
     console.log(
-      `[draw-request] emailed ${sent?.id} — draw #${data.draw_no} for ${data.property}`
+      `[draw-request] emailed ${sent?.id} — draw #${data.draw_no} for ${data.property}` +
+        ` (${(data.attachments || []).length} attachments)`
     );
     return NextResponse.json({ ok: true, emailed: true });
   } catch (err) {

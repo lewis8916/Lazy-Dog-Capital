@@ -5,6 +5,11 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, Info, Loader2, Plus, X } from "lucide-react";
 import { DRAW_REQUEST, computeDraw } from "@/lib/requestForms";
 import { formatMoney, usd } from "@/lib/dealMath";
+import FileUpload, {
+  MAX_TOTAL_BYTES,
+  formatBytes,
+  toBase64,
+} from "@/components/FileUpload";
 
 const emptyItem = () => ({ desc: "", inv: "", pay: "", amt: "", pct: "" });
 
@@ -35,11 +40,21 @@ const initial = {
   items: [emptyItem()],
 };
 
+const UPLOAD_HINTS = [
+  "Wide shots and close-ups of each item you're claiming.",
+  "Invoices or receipts covering this request.",
+  "Showing your last draw was paid out to contractors and suppliers.",
+];
+
 export default function DrawRequestForm() {
   const [v, setV] = useState(initial);
+  const [uploads, setUploads] = useState({ 0: [], 1: [], 2: [] });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
   const [serverError, setServerError] = useState("");
+
+  const allFiles = [...uploads[0], ...uploads[1], ...uploads[2]];
+  const usedBytes = allFiles.reduce((n, f) => n + f.size, 0);
 
   const set = (k, val) => {
     setV((s) => ({ ...s, [k]: val }));
@@ -81,6 +96,13 @@ export default function DrawRequestForm() {
     DRAW_REQUEST.certifications.forEach((_, i) => {
       if (!v[`cert_${i}`]) e[`cert_${i}`] = "Required";
     });
+    // Without photos there is nothing for the inspector to check against.
+    if (!uploads[0].length) {
+      e.uploads = "At least one photo of the completed work is required";
+    }
+    if (usedBytes > MAX_TOTAL_BYTES) {
+      e.uploads = `Attachments total ${formatBytes(usedBytes)} — the limit is ${formatBytes(MAX_TOTAL_BYTES)}`;
+    }
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -96,10 +118,24 @@ export default function DrawRequestForm() {
     setStatus("submitting");
     setServerError("");
     try {
+      // Encode uploads inline; the API route forwards them as email attachments.
+      const attachments = [];
+      for (const [group, list] of Object.entries(uploads)) {
+        for (const file of list) {
+          attachments.push({
+            group: DRAW_REQUEST.attachments[group],
+            filename: file.name,
+            type: file.type,
+            size: file.size,
+            content: await toBase64(file),
+          });
+        }
+      }
+
       const res = await fetch(DRAW_REQUEST.endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(v),
+        body: JSON.stringify({ ...v, attachments }),
       });
       if (!res.ok) throw new Error((await res.json()).error || "Submission failed");
       setStatus("success");
@@ -125,8 +161,8 @@ export default function DrawRequestForm() {
           with us. {DRAW_REQUEST.successBody}
         </p>
         <p className="text-teal/60 text-sm leading-relaxed mb-8 max-w-lg mx-auto">
-          Email your photos, invoices, and last draw&apos;s bank statement to us
-          now — the inspection can&apos;t be scheduled without them.
+          Your {allFiles.length} attachment{allFiles.length === 1 ? "" : "s"} came
+          through with it.
         </p>
         <Link href="/resources/forms" className="btn-primary">
           Back to resources <ArrowRight size={18} />
@@ -359,21 +395,41 @@ export default function DrawRequestForm() {
 
           {/* Attached */}
           <Section heading="Attached">
-            <p className="text-teal/55 text-sm mb-5 leading-relaxed">
-              Tick what you&apos;re sending, then email the files to us after
-              submitting.
+            <p className="text-teal/55 text-sm mb-6 leading-relaxed">
+              Attach your files here and they&apos;ll come through with this
+              request. Photos are resized automatically — no need to shrink them
+              first. Images and PDFs, up to {formatBytes(MAX_TOTAL_BYTES)} in
+              total.
             </p>
-            <div className="space-y-3">
+
+            <div className="space-y-6">
               {DRAW_REQUEST.attachments.map((a, i) => (
-                <label key={i}
-                  className="flex gap-4 p-4 rounded-xl bg-cream-light border border-teal/10 hover:border-bronze/40 cursor-pointer transition-colors">
-                  <input type="checkbox" checked={!!v[`att_${i}`]}
-                    onChange={(e) => set(`att_${i}`, e.target.checked)}
-                    className="mt-0.5 w-4 h-4 accent-bronze flex-shrink-0" />
-                  <span className="text-teal/80 text-sm leading-relaxed">{a}</span>
-                </label>
+                <FileUpload
+                  key={i}
+                  label={a}
+                  hint={UPLOAD_HINTS[i]}
+                  files={uploads[i]}
+                  otherBytes={usedBytes - uploads[i].reduce((n, f) => n + f.size, 0)}
+                  error={i === 0 ? errors.uploads : null}
+                  onChange={(next) => {
+                    setUploads((s) => ({ ...s, [i]: next }));
+                    if (errors.uploads) setErrors((e) => ({ ...e, uploads: null }));
+                  }}
+                />
               ))}
             </div>
+
+            {allFiles.length > 0 && (
+              <div className="mt-5 flex items-center justify-between gap-4 px-4 py-3 rounded-xl bg-teal/5">
+                <span className="text-xs font-semibold tracking-widest uppercase text-teal/55">
+                  Attached in total
+                </span>
+                <span className="text-teal font-bold">
+                  {allFiles.length} file{allFiles.length === 1 ? "" : "s"} ·{" "}
+                  {formatBytes(usedBytes)}
+                </span>
+              </div>
+            )}
           </Section>
 
           {/* Certifications */}
