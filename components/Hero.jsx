@@ -95,16 +95,23 @@ export default function Hero() {
                   {[
                     ["Covers", "Purchase + full rehab"],
                     ["Loan cap", "80% of after-repair value"],
-                    ["You bring", "10%+ down payment"],
+                    ["You bring", "10%+ down payment", "Based on purchase price"],
                     ["Rehab funds", "Staged draws, as work verifies"],
                     ["Early payoff", "Anytime — no penalty"],
-                  ].map(([k, v]) => (
+                  ].map(([k, v, note]) => (
                     <div
                       key={k}
                       className="flex justify-between items-center gap-4 pb-3 border-b border-teal/10 last:border-0"
                     >
                       <span className="text-teal/60 text-sm flex-shrink-0">{k}</span>
-                      <span className="text-teal font-semibold text-right">{v}</span>
+                      <span className="text-right">
+                        <span className="block text-teal font-semibold">{v}</span>
+                        {note && (
+                          <span className="block text-teal/50 text-xs mt-0.5">
+                            {note}
+                          </span>
+                        )}
+                      </span>
                     </div>
                   ))}
                 </div>
