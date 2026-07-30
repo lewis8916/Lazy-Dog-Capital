@@ -253,10 +253,15 @@ export default function SubmitDealForm() {
                     </div>
                   </div>
                 </div>
-                <p className="text-teal/50 text-xs mt-4 leading-relaxed">
-                  A rough guide only — we size every loan on our own review of the
-                  property and the comps. A tight number is still worth sending.
-                </p>
+                <div className="mt-5 pt-4 border-t border-teal/10">
+                  <p className="text-bronze font-bold text-base sm:text-lg leading-snug">
+                    Tight doesn&apos;t mean no — we make tight deals work.
+                  </p>
+                  <p className="text-teal/50 text-xs mt-2 leading-relaxed">
+                    A rough guide only. We size every loan on our own review of the
+                    property and the comps — send it either way.
+                  </p>
+                </div>
               </div>
             )}
           </section>
