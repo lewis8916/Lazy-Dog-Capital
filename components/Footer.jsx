@@ -50,16 +50,25 @@ export default function Footer() {
                 ["How it works", "/loan"],
                 ["Why Lazy Dog", "/why"],
                 ["FAQ", "/faq"],
-                ["Apply", "/apply"],
-              ].map(([l, h]) => (
+                ["Apply", "/apply", true],
+              ].map(([l, h, isButton]) => (
                 <li key={l}>
-                  <Link
-                    href={h}
-                    className="group inline-flex items-center gap-2 text-cream/70 hover:text-bronze transition-colors text-sm"
-                  >
-                    <span className="w-0 group-hover:w-3 h-px bg-bronze transition-all duration-300" />
-                    {l}
-                  </Link>
+                  {isButton ? (
+                    <Link
+                      href={h}
+                      className="inline-flex items-center px-4 py-1.5 rounded-full bg-bronze text-cream text-sm font-semibold hover:bg-bronze-light transition-colors"
+                    >
+                      {l}
+                    </Link>
+                  ) : (
+                    <Link
+                      href={h}
+                      className="group inline-flex items-center gap-2 text-cream/70 hover:text-bronze transition-colors text-sm"
+                    >
+                      <span className="w-0 group-hover:w-3 h-px bg-bronze transition-all duration-300" />
+                      {l}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

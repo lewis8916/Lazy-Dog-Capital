@@ -1,14 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
+
+const resources = [
+  { href: "/resources/draw-request", label: "Draw Request" },
+  { href: "/resources/payoff-request", label: "Payoff Request" },
+  { href: "/resources/forms", label: "Forms" },
+];
 
 const links = [
   { href: "/loan", label: "The Loan" },
   { href: "/why", label: "Why Us" },
   { href: "/deal-calculator", label: "Calculator" },
+  { href: "/resources", label: "Resources", children: resources },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact Us" },
 ];
@@ -16,7 +23,9 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState(null); // open dropdown label
   const pathname = usePathname();
+  const navRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -25,10 +34,31 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close the mobile menu on navigation
+  // Close everything on navigation.
   useEffect(() => {
     setOpen(false);
+    setMenu(null);
   }, [pathname]);
+
+  // Close the dropdown on outside click or Escape.
+  useEffect(() => {
+    if (!menu) return;
+    const onDown = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) setMenu(null);
+    };
+    const onKey = (e) => e.key === "Escape" && setMenu(null);
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [menu]);
+
+  const isActive = (l) =>
+    l.children
+      ? l.children.some((c) => pathname === c.href) || pathname.startsWith(l.href)
+      : pathname === l.href;
 
   return (
     <header
@@ -47,20 +77,67 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-7">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`text-base font-medium whitespace-nowrap transition-colors ${
-                pathname === l.href
-                  ? "text-bronze"
-                  : "text-cream/80 hover:text-bronze"
-              }`}
-            >
-              {l.label}
-            </Link>
-          ))}
+        <nav ref={navRef} className="hidden lg:flex items-center gap-7">
+          {links.map((l) =>
+            l.children ? (
+              <div
+                key={l.label}
+                className="relative"
+                onMouseEnter={() => setMenu(l.label)}
+                onMouseLeave={() => setMenu(null)}
+              >
+                <button
+                  type="button"
+                  onClick={() => setMenu(menu === l.label ? null : l.label)}
+                  aria-expanded={menu === l.label}
+                  aria-haspopup="true"
+                  className={`inline-flex items-center gap-1.5 text-base font-medium whitespace-nowrap transition-colors ${
+                    isActive(l) || menu === l.label
+                      ? "text-bronze"
+                      : "text-cream/80 hover:text-bronze"
+                  }`}
+                >
+                  {l.label}
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform duration-200 ${
+                      menu === l.label ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {menu === l.label && (
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4">
+                    <div className="w-60 rounded-2xl bg-teal-dark border border-cream/10 shadow-2xl shadow-teal/40 overflow-hidden py-2">
+                      {l.children.map((c) => (
+                        <Link
+                          key={c.href}
+                          href={c.href}
+                          className={`block px-5 py-3 text-sm transition-colors ${
+                            pathname === c.href
+                              ? "text-bronze bg-cream/5"
+                              : "text-cream/80 hover:text-bronze hover:bg-cream/5"
+                          }`}
+                        >
+                          {c.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`text-base font-medium whitespace-nowrap transition-colors ${
+                  isActive(l) ? "text-bronze" : "text-cream/80 hover:text-bronze"
+                }`}
+              >
+                {l.label}
+              </Link>
+            )
+          )}
           <Link
             href="/submit-deal"
             className="px-5 py-2.5 rounded-full bg-bronze text-cream text-base font-semibold whitespace-nowrap hover:bg-bronze-light transition-all shadow-lg shadow-bronze/30"
@@ -79,21 +156,42 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="lg:hidden bg-teal-dark border-t border-cream/10">
+        <div className="lg:hidden bg-teal-dark border-t border-cream/10 max-h-[75vh] overflow-y-auto">
           <div className="container-x py-6 flex flex-col gap-4">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={`text-base ${
-                  pathname === l.href
-                    ? "text-bronze"
-                    : "text-cream/90 hover:text-bronze"
-                }`}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {links.map((l) =>
+              l.children ? (
+                <div key={l.label}>
+                  <div className="text-cream/50 text-xs tracking-widest uppercase font-semibold mb-3">
+                    {l.label}
+                  </div>
+                  <div className="flex flex-col gap-3 pl-4 border-l border-cream/15">
+                    {l.children.map((c) => (
+                      <Link
+                        key={c.href}
+                        href={c.href}
+                        className={`text-base ${
+                          pathname === c.href
+                            ? "text-bronze"
+                            : "text-cream/90 hover:text-bronze"
+                        }`}
+                      >
+                        {c.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`text-base ${
+                    isActive(l) ? "text-bronze" : "text-cream/90 hover:text-bronze"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              )
+            )}
             <Link
               href="/submit-deal"
               className="mt-2 inline-block px-5 py-3 text-center rounded-full bg-bronze text-cream font-semibold"
