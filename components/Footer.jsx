@@ -70,7 +70,9 @@ export default function Footer() {
             <ul className="space-y-3.5">
               {[
                 ["Who we are", "/why"],
-                ["Bring us a deal", "/apply"],
+                ["Deal calculator", "/deal-calculator"],
+                ["Bring us a deal", "/submit-deal"],
+                ["Contact us", "/contact"],
               ].map(([l, h]) => (
                 <li key={l}>
                   <Link

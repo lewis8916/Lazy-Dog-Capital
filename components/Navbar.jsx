@@ -10,7 +10,7 @@ const links = [
   { href: "/why", label: "Why Us" },
   { href: "/deal-calculator", label: "Calculator" },
   { href: "/faq", label: "FAQ" },
-  { href: "/apply", label: "Contact Us" },
+  { href: "/contact", label: "Contact Us" },
 ];
 
 export default function Navbar() {
