@@ -2,7 +2,7 @@ import FAQ from "@/components/FAQ";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
-  title: "FAQ — Lazy Dog Capital",
+  title: "FAQ",
   description:
     "Straight answers about our fix & flip loans: borrowing limits, costs, draws, early payoff, and what we need to look at your deal.",
 };

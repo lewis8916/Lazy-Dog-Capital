@@ -2,7 +2,7 @@ import DealCalculator from "@/components/DealCalculator";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
-  title: "Deal Calculator — Lazy Dog Capital",
+  title: "Deal Calculator",
   description:
     "Run the numbers on a fix & flip before you call anyone. Purchase price, rehab budget, and after-repair value — see the loan you'd need against our 80% of ARV cap.",
 };

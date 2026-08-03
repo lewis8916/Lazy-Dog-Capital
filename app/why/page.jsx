@@ -1,7 +1,7 @@
 import WhyChooseUs from "@/components/WhyChooseUs";
 
 export const metadata = {
-  title: "Why Lazy Dog — Lazy Dog Capital",
+  title: "Why Lazy Dog",
   description:
     "Run by two DFW investors with 800+ deals and 23 years in this market. We read your project the way a builder does.",
 };

@@ -2,7 +2,7 @@ import Products from "@/components/Products";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
-  title: "The Loan — Lazy Dog Capital",
+  title: "The Loan",
   description:
     "How our fix & flip loan works: one loan covers purchase and rehab, capped at 80% of after-repair value, with staged draws and no prepayment penalty.",
 };

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { renderDealEmail } from "@/lib/dealEmail";
 import { guardRequest } from "@/lib/spamGuard";
+import { sendAutoReply } from "@/lib/autoReply";
 
 const REQUIRED = ["name", "phone", "email", "address", "price", "rehab", "arv"];
 
@@ -56,7 +57,11 @@ export async function POST(request) {
     if (error) throw new Error(error.message || "Resend rejected the message");
 
     console.log(`[deal] emailed submission ${sent?.id} for ${data.address}`);
-    return NextResponse.json({ ok: true, emailed: true });
+
+    // Acknowledge to the sender. Best-effort — never fails the submission.
+    const ack = await sendAutoReply("deal", data, data.email);
+
+    return NextResponse.json({ ok: true, emailed: true, acknowledged: ack.sent });
   } catch (err) {
     console.error("[deal] email delivery failed:", err.message);
     console.log("[deal] UNDELIVERED submission:\n" + text);

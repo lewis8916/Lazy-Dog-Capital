@@ -2,7 +2,7 @@ import ContactForm from "@/components/ContactForm";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
-  title: "Contact Us — Lazy Dog Capital",
+  title: "Contact Us",
   description:
     "Questions about a deal, a loan in progress, or how we lend? Call 214-740-4989 or send us a note — a real person will get back to you.",
 };

@@ -2,7 +2,7 @@ import DrawRequestForm from "@/components/DrawRequestForm";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
-  title: "Draw Request — Lazy Dog Capital",
+  title: "Draw Request",
   description:
     "Submit a construction draw request on an active Lazy Dog Capital loan. List the completed work, we inspect and verify it, and the funds release.",
 };

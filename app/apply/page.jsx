@@ -2,7 +2,7 @@ import LoanApplicationForm from "@/components/LoanApplicationForm";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
-  title: "Loan Application — Lazy Dog Capital",
+  title: "Loan Application",
   description:
     "Apply for a fix-and-flip loan secured by a first lien on Texas investment property. Tell us about the entity, the principals, and the deal.",
 };

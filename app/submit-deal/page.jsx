@@ -3,7 +3,7 @@ import SubmitDealForm from "@/components/SubmitDealForm";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
-  title: "Submit a Deal — Lazy Dog Capital",
+  title: "Submit a Deal",
   description:
     "Send us the address, the price, and your rehab budget. We'll tell you what we'd lend and what it would cost. No credit pull, no obligation.",
 };

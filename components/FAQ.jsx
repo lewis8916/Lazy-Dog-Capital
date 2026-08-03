@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import Link from "next/link";
+import { Plus, Minus, ArrowRight } from "lucide-react";
 
 const faqs = [
   {
@@ -17,8 +18,13 @@ const faqs = [
     a: "Rate and points are set deal by deal and quoted plainly before you commit — and it costs nothing to hear them. You pay interest monthly, and the principal comes back at payoff.",
   },
   {
+    q: "Will you roll in the points on the loan?",
+    a: "Yes — we'll roll the points into the loan, as long as there's room under our 80% of after-repair value cap. Rolling them in costs a quarter point more than paying them at closing. Your 10% down payment still has to come from you in cash on the purchase price; that part doesn't get financed. Your loan is just a little larger.",
+  },
+  {
     q: "What do you need from me to look at a deal?",
     a: "Four things: the property address, the purchase price, your rehab scope and budget, and what you believe it's worth finished. We'll check the numbers and the comps ourselves.",
+    cta: { href: "/submit-deal", label: "Submit a deal" },
   },
   {
     q: "How do rehab draws work?",
@@ -81,6 +87,18 @@ export default function FAQ() {
                   >
                     <div className="overflow-hidden">
                       <p className="text-teal/75 leading-relaxed pr-12">{f.a}</p>
+                      {f.cta && (
+                        <Link
+                          href={f.cta.href}
+                          className="group/cta inline-flex items-center gap-2 mt-4 text-bronze font-semibold hover:underline"
+                        >
+                          {f.cta.label}
+                          <ArrowRight
+                            size={16}
+                            className="group-hover/cta:translate-x-0.5 transition-transform"
+                          />
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Forms — Lazy Dog Capital",
+  title: "Forms",
   description:
     "Every Lazy Dog Capital form in one place: draw requests, payoff requests, the loan application, and the deal calculator.",
 };

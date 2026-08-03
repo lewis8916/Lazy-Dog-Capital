@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import { PAYOFF_REQUEST } from "@/lib/requestForms";
 
 export const metadata = {
-  title: "Payoff Request — Lazy Dog Capital",
+  title: "Payoff Request",
   description:
     "Request a payoff statement on an active Lazy Dog Capital loan. Tell us your closing date and title company and we'll send the figures over.",
 };

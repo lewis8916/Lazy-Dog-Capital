@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { renderApplicationEmail } from "@/lib/applicationEmail";
 import { guardRequest } from "@/lib/spamGuard";
+import { sendAutoReply } from "@/lib/autoReply";
 
 // Fields that must be present for an application to be actionable.
 const REQUIRED = [
@@ -121,7 +122,15 @@ export async function POST(request) {
     if (error) throw new Error(error.message || "Resend rejected the message");
 
     console.log(`[apply] emailed application ${sent?.id} for ${data.e_name}`);
-    return NextResponse.json({ ok: true, emailed: true });
+
+    // Acknowledge to the applicant. Best-effort — never fails the submission.
+    const ack = await sendAutoReply(
+      "application",
+      data,
+      data.g1_email || data.e_email
+    );
+
+    return NextResponse.json({ ok: true, emailed: true, acknowledged: ack.sent });
   } catch (err) {
     // Never drop an application silently — log the whole thing, then tell the
     // applicant so they can follow up by phone.

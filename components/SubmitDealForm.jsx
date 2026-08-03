@@ -50,7 +50,14 @@ export default function SubmitDealForm() {
 
   // Live sanity check against the 80%-of-ARV cap — same math the deal
   // calculator and the notification email use.
-  const { down, loanNeeded, cap, inRange, ready: showCheck } = computeDeal(form);
+  const {
+    down,
+    buffer,
+    loanNeeded,
+    cap,
+    inRange,
+    ready: showCheck,
+  } = computeDeal(form);
 
   const validate = () => {
     const e = {};
@@ -263,6 +270,9 @@ export default function SubmitDealForm() {
                     </div>
                     <div className="text-teal font-bold text-lg">
                       ${loanNeeded.toLocaleString("en-US")}
+                    </div>
+                    <div className="text-[10px] text-teal/45 mt-0.5">
+                      incl. ${buffer.toLocaleString("en-US")} rehab buffer
                     </div>
                   </div>
                   <div>
