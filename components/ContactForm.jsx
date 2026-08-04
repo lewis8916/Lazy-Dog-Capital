@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   Loader2,
   Phone,
+  Mail,
   MapPin,
   Clock,
   Calculator,
@@ -269,6 +270,23 @@ export default function ContactForm() {
                   </div>
                   <div className="text-cream font-semibold group-hover:text-bronze transition-colors">
                     214-740-4989
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="mailto:loans@lazydogcapital.com"
+                className="flex items-start gap-4 group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-bronze/15 flex items-center justify-center flex-shrink-0">
+                  <Mail size={17} className="text-bronze" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-[10px] tracking-widest uppercase text-cream/40">
+                    Email us
+                  </div>
+                  <div className="text-cream font-semibold group-hover:text-bronze transition-colors break-all">
+                    loans@lazydogcapital.com
                   </div>
                 </div>
               </a>
