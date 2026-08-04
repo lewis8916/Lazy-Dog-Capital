@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 const SITE_URL = "https://lazydogcapital.com";
 const TITLE = "Lazy Dog Capital — Fix & Flip Lending in Dallas–Fort Worth";
 const DESCRIPTION =
-  "Short-term private capital for fix & flip investors in Dallas–Fort Worth. One loan covers purchase and rehab, with staged draws and no prepayment penalty. Run by operators with 800+ deals behind them.";
+  "Short-term private capital for fix & flip investors in Dallas–Fort Worth. One loan covers purchase and rehab, with rehab draws reimbursed as work completes and no prepayment penalty. Run by operators with 800+ deals behind them.";
 
 export const metadata = {
   // Required for Open Graph image URLs to resolve to absolute paths.

@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Check,
   CheckCircle2,
+  Info,
   Loader2,
   Plus,
   TriangleAlert,
@@ -460,6 +461,17 @@ function DeclarationsStep({ values, errors, set, disqualified }) {
               <span className="text-teal/80 text-sm leading-relaxed">{c.text}</span>
             </label>
           ))}
+        </div>
+
+        {/* Credit is not authorized here — this form collects neither SSN nor
+            date of birth, and both are required to pull one. */}
+        <div className="mt-5 flex items-start gap-4 p-5 rounded-2xl bg-bronze/10 border border-bronze/25">
+          <Info size={20} className="text-bronze flex-shrink-0 mt-0.5" />
+          <p className="text-teal/80 text-sm leading-relaxed">
+            We&apos;ll send a separate credit authorization form for each
+            principal and guarantor to sign. That form is where we collect the
+            information needed to run credit and a background check.
+          </p>
         </div>
       </section>
 

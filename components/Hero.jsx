@@ -108,8 +108,9 @@ export default function Hero() {
                   {[
                     ["Covers", "Purchase + full rehab"],
                     ["Loan cap", "80% of after-repair value"],
-                    ["You bring", "10%+ down payment", "Based on purchase price"],
-                    ["Rehab funds", "Staged draws, as work verifies"],
+                    ["You bring", "10% down payment", "Based on purchase price"],
+                    ["Term", "Up to 12 months"],
+                    ["Rehab funds", "Draws, reimbursed as work completes"],
                     ["Early payoff", "Anytime — no penalty"],
                   ].map(([k, v, note]) => (
                     <div
@@ -132,7 +133,7 @@ export default function Hero() {
                 <div className="mt-6 p-4 rounded-xl bg-teal/5">
                   <div className="flex items-center gap-2 text-teal text-sm">
                     <span className="w-2 h-2 rounded-full bg-bronze animate-pulse" />
-                    Terms quoted per deal — it costs nothing to hear them
+                    Terms quoted per deal — it costs nothing to hear yours
                   </div>
                 </div>
               </div>

@@ -8,7 +8,7 @@ const cards = [
     icon: FileText,
     kicker: "The Loan",
     title: "One loan, purchase to finish line",
-    desc: "Purchase and rehab funded together, capped at 80% of after-repair value, with staged draws and no prepayment penalty.",
+    desc: "Purchase and rehab funded together, capped at 80% of after-repair value, with rehab draws reimbursed as work completes and no prepayment penalty.",
     href: "/loan",
     cta: "See how it works",
   },

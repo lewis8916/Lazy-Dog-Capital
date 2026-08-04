@@ -52,7 +52,6 @@ export default function SubmitDealForm() {
   // calculator and the notification email use.
   const {
     down,
-    buffer,
     loanNeeded,
     cap,
     inRange,
@@ -270,9 +269,6 @@ export default function SubmitDealForm() {
                     </div>
                     <div className="text-teal font-bold text-lg">
                       ${loanNeeded.toLocaleString("en-US")}
-                    </div>
-                    <div className="text-[10px] text-teal/45 mt-0.5">
-                      incl. ${buffer.toLocaleString("en-US")} rehab buffer
                     </div>
                   </div>
                   <div>

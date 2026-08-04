@@ -1,33 +1,47 @@
 "use client";
 
-import { Home, Layers, ClipboardCheck, Landmark, ArrowUpRight } from "lucide-react";
+import {
+  Home,
+  Layers,
+  ClipboardCheck,
+  Landmark,
+  CalendarClock,
+  ArrowUpRight,
+} from "lucide-react";
 
 const features = [
   {
     icon: Home,
     badge: "One Loan",
     title: "Purchase + Rehab Together",
-    desc: "One loan funds buying the house and renovating it. Your rehab budget — plus a 10% buffer — is committed at closing, so you're never scrambling to fund the work out of pocket.",
+    desc: "One loan funds buying the house and renovating it. Part funds at closing to buy the property, and the rest is held back and released to you as the work gets done.",
     points: ["Single-family fix & flip", "Dallas–Fort Worth", "First-timers welcome"],
   },
   {
     icon: Landmark,
     title: "Sized Conservatively",
-    desc: "Every loan is capped at 80% of the home's after-repair value — or your actual cost basis, whichever is lower. Conservative sizing protects your margin as much as our capital.",
-    points: ["80% of ARV max", "10%+ down payment", "We verify the comps"],
+    desc: "Every loan is capped at 80% of the home's after-repair value. That one number sets your loan. Sizing against the finished value, rather than what you paid, is what leaves room in the deal for both of us.",
+    points: ["80% of ARV max", "10% down payment", "We verify the comps"],
   },
   {
     icon: ClipboardCheck,
-    title: "Staged Rehab Draws",
-    desc: "Renovation money releases as completed work is verified — in up to five draws across the project. It keeps cash flowing to the job and the budget honest.",
-    points: ["Up to 5 draws", "Fast verification", "Builder-run inspections"],
+    title: "Rehab Draws",
+    desc: "You pay for the work, then we reimburse you. Request a draw whenever you've finished some line items — no set schedule, no cap on how many. Send a bank statement showing the money left your account, we come look at the work in person, and we fund it.",
+    points: ["No draw limit", "$5,000 minimum", "We inspect in person"],
   },
   {
     icon: Layers,
     badge: "No Penalty",
     title: "Close Fast, Exit Free",
     desc: "Loans close at a title company, cleanly and on record — in days, not months. Pay off any time with no prepayment penalty; sell early and you simply pay less interest.",
-    points: ["Days to close", "Recorded at title", "Payable anytime"],
+    points: ["Up to 12 months", "Recorded at title", "Payable anytime"],
+  },
+  {
+    icon: CalendarClock,
+    badge: "Timeline",
+    title: "Time to Do It Right",
+    desc: "Up to twelve months to buy it, fix it, and sell it. If your timeline slips, talk to us before maturity rather than after — an extension is easier to arrange early.",
+    points: ["Up to 12 months", "Extension available", "Interest-only payments"],
   },
 ];
 

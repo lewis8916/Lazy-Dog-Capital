@@ -4,7 +4,7 @@ import PageHeader from "@/components/PageHeader";
 export const metadata = {
   title: "The Loan",
   description:
-    "How our fix & flip loan works: one loan covers purchase and rehab, capped at 80% of after-repair value, with staged draws and no prepayment penalty.",
+    "How our fix & flip loan works: one loan covers purchase and rehab, capped at 80% of after-repair value, with rehab draws reimbursed as work completes and no prepayment penalty.",
 };
 
 export default function LoanPage() {
