@@ -61,7 +61,7 @@ export const CERTIFICATIONS = [
   { name: "a1", text: "The information in this application is true, complete, and accurate." },
   {
     name: "a2",
-    text: "I authorize Lazy Dog Capital LLC to verify this information and to obtain credit and background reports on the borrowing entity and each principal.",
+    text: "I authorize Lazy Dog Capital LLC to verify the information in this application.",
   },
   {
     name: "a3",

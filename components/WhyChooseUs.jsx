@@ -20,8 +20,8 @@ const benefits = [
   },
   {
     icon: Sprout,
-    title: "Built for First-Timers",
-    desc: "New to flipping? That's fine. What matters is a sound deal and a willingness to do the work — we'll help you pressure-test the rest.",
+    title: "First Flip or Fiftieth",
+    desc: "New to this or twenty deals in, what matters is a sound deal and a willingness to do the work. We'll help you pressure-test the rest either way.",
   },
   {
     icon: MapPin,

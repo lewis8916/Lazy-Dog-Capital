@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { renderApplicationEmail } from "@/lib/applicationEmail";
-import { guardRequest } from "@/lib/spamGuard";
+import { guardRequest, clientIp } from "@/lib/spamGuard";
 import { sendAutoReply } from "@/lib/autoReply";
 
 // Fields that must be present for an application to be actionable.
@@ -91,6 +91,22 @@ export async function POST(request) {
   if (!/^\S+@\S+\.\S+$/.test(data.e_email)) {
     return NextResponse.json({ error: "Enter a valid entity email." }, { status: 400 });
   }
+
+  if (data.esign_consent !== true) {
+    return NextResponse.json(
+      { error: "You must agree to sign electronically before submitting." },
+      { status: 400 }
+    );
+  }
+
+  // The signing record. The date typed into the form is the applicant's claim;
+  // this is when we actually received it, and from where.
+  data.signed_record = {
+    receivedAt: new Date().toISOString(),
+    ip: clientIp(request) ?? "unavailable",
+    userAgent: request.headers.get("user-agent") ?? "unavailable",
+    consent: true,
+  };
 
   const { subject, html, text } = renderApplicationEmail(data);
 

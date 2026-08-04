@@ -84,6 +84,7 @@ export default function LoanApplicationForm() {
       if (!String(values.s1_name || "").trim()) e.s1_name = "Required";
       if (!String(values.s1_sig || "").trim()) e.s1_sig = "Required";
       if (!String(values.s1_date || "").trim()) e.s1_date = "Required";
+      if (!values.esign_consent) e.esign_consent = "Required";
     }
 
     setErrors(e);
@@ -466,12 +467,11 @@ function DeclarationsStep({ values, errors, set, disqualified }) {
       <section>
         <div className="flex items-center gap-3 mb-2">
           <span className="bronze-bar !w-8" />
-          <h3 className="eyebrow text-bronze">Credit Authorization & Signatures</h3>
+          <h3 className="eyebrow text-bronze">Signatures</h3>
         </div>
         <p className="text-teal/55 text-sm mb-6 max-w-2xl">
-          By typing your name below, each principal authorizes Lazy Dog Capital LLC
-          to obtain consumer credit reports and background checks, and to verify the
-          information in this application.
+          By typing your name below, each principal confirms the information in
+          this application is accurate to the best of their knowledge.
         </p>
 
         <div className="grid sm:grid-cols-2 gap-5">
@@ -512,6 +512,33 @@ function DeclarationsStep({ values, errors, set, disqualified }) {
             />
           </div>
         ))}
+
+        {/* ESIGN consent — the signer has to opt into signing electronically
+            before a typed name counts for anything. */}
+        <label
+          className={`mt-5 flex gap-4 p-5 rounded-2xl bg-white border cursor-pointer transition-colors ${
+            errors.esign_consent
+              ? "border-red-300"
+              : "border-teal/10 hover:border-bronze/40"
+          }`}
+        >
+          <input
+            type="checkbox"
+            checked={!!values.esign_consent}
+            onChange={(e) => set("esign_consent", e.target.checked)}
+            className="mt-0.5 w-4 h-4 accent-bronze flex-shrink-0"
+          />
+          <span className="text-teal/80 text-sm leading-relaxed">
+            I agree to sign this application electronically, and I understand my
+            typed name has the same effect as a handwritten signature. I can
+            request a paper copy instead by calling 214-740-4989.
+          </span>
+        </label>
+        {errors.esign_consent && (
+          <p className="text-red-500 text-xs mt-1.5">
+            You&apos;ll need to agree before submitting.
+          </p>
+        )}
       </section>
 
       {/* Notes */}

@@ -30,7 +30,7 @@ export default function Hero() {
             </div>
 
             <h1 className="display text-cream text-5xl sm:text-6xl lg:text-7xl mb-7">
-              Your first flip
+              Your flip
               <br />
               deserves a lender
               <br />

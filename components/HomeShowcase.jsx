@@ -120,7 +120,7 @@ export default function HomeShowcase() {
                 Start Your Application <ArrowRight size={18} />
               </Link>
               <Link href="/faq" className="btn-ghost justify-center">
-                Questions first? Read the FAQ
+                Have questions? Read the FAQ
               </Link>
             </div>
           </div>

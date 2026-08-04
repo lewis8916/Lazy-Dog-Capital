@@ -6,8 +6,8 @@ import { Plus, Minus, ArrowRight } from "lucide-react";
 
 const faqs = [
   {
-    q: "I've never flipped a house. Will you actually lend to me?",
-    a: "Yes — newer investors are exactly who this was built for. What matters is a sound deal and a willingness to do the work; we help you pressure-test the rest before anyone signs anything.",
+    q: "Does it matter how many flips I've done?",
+    a: "Not much. Whether this is your first or your fiftieth, what matters is a sound deal and a willingness to do the work. Experienced operators get moved along faster; newer investors get more help pressure-testing the numbers before anyone signs anything.",
   },
   {
     q: "How much can I borrow?",
