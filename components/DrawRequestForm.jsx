@@ -44,7 +44,7 @@ const initial = {
 const UPLOAD_HINTS = [
   "Wide shots and close-ups of each item you're claiming.",
   "Invoices or receipts covering this request.",
-  "Showing your last draw was paid out to contractors and suppliers.",
+  "Receipts and invoices alone aren't enough — we need to see the money leave your account. If you paid cash, show us the withdrawal.",
 ];
 
 export default function DrawRequestForm() {
@@ -178,9 +178,11 @@ export default function DrawRequestForm() {
       <div className="mb-6 flex items-start gap-4 p-5 rounded-2xl bg-bronze/10 border border-bronze/25">
         <Info size={20} className="text-bronze flex-shrink-0 mt-0.5" />
         <p className="text-teal/80 text-sm leading-relaxed">
-          Funds are released only after the completed work is inspected and
-          verified. Interest accrues only on amounts advanced, so each draw
-          increases your monthly payment.
+          You pay for the work first, then we reimburse you. Request a draw
+          whenever you&apos;ve finished some line items — no set schedule, no cap
+          on how many. Minimum draw is $5,000. We inspect the work in person
+          before funding, every time. Interest accrues only on amounts advanced,
+          so each draw increases your monthly payment.
         </p>
       </div>
 
@@ -265,6 +267,13 @@ export default function DrawRequestForm() {
               <p className="text-red-600 text-sm mt-3">
                 This draw is larger than the balance available. Check the numbers,
                 or call us before submitting.
+              </p>
+            )}
+
+            {d.thisDraw > 0 && d.thisDraw < 5000 && (
+              <p className="text-bronze text-sm mt-3 font-semibold">
+                Draws are normally $5,000 minimum. Send it anyway if you need to
+                — call us and we&apos;ll talk it through.
               </p>
             )}
 

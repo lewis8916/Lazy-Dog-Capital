@@ -23,7 +23,7 @@ const GROUPS = [
       {
         icon: ClipboardCheck,
         title: "Draw Request",
-        desc: "Request a rehab draw once a stage of work is finished. We verify it and release the money.",
+        desc: "Finished some line items and paid for them? Request a draw and we'll reimburse you after we've seen the work.",
         href: "/resources/draw-request",
       },
       {
