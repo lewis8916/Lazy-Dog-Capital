@@ -7,8 +7,8 @@ export default function robots() {
         userAgent: "*",
         allow: "/",
         // Nothing useful for a crawler, and no reason to advertise the
-        // submission endpoints.
-        disallow: "/api/",
+        // submission endpoints. /library is internal and password-protected.
+        disallow: ["/api/", "/library", "/library/"],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

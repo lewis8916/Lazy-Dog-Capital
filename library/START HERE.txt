@@ -1,0 +1,33 @@
+LAZY DOG CAPITAL — DOCUMENT LIBRARY
+
+Open  Workflow_Map.html  in any browser.
+
+That page is the map of the whole loan process. Every document is a
+click — the green "Word" button opens the editable file, the gold
+"PDF" button opens the send-ready version.
+
+For it to work, keep these three together in the same folder:
+
+    Workflow_Map.html
+    1_Word/
+    2_PDF/
+
+If you move the HTML file on its own, the links break.
+
+WHERE TO PUT IT
+  Best: a folder on your computer, or a synced Dropbox/OneDrive folder.
+  Double-click the HTML and everything works offline.
+
+  Google Drive: the links will NOT work from Drive's web preview.
+  Drive can store the folder for backup, but to use the map, download
+  the folder first (or use Drive for Desktop, which puts it on your
+  computer as a normal folder).
+
+  Want it on your phone or shared with Steve without downloading?
+  Host the folder on your website — for example
+  lazydogcapital.com/library — and the map works from any browser.
+
+TIP
+  Right-click Workflow_Map.html and set it as a browser bookmark.
+
+Lazy Dog Capital LLC · 214-740-4989
