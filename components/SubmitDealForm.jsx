@@ -12,6 +12,7 @@ const initial = {
   name: "",
   phone: "",
   email: "",
+  entity: "",
   address: "",
   price: "",
   rehab: "",
@@ -164,6 +165,15 @@ export default function SubmitDealForm() {
                 error={errors.email}
                 onChange={set("email")}
                 placeholder="jane@example.com"
+              />
+            </div>
+            <div className="mt-5">
+              <Input
+                label="Entity name"
+                hint="If you have one. Leave blank if it isn't formed yet."
+                value={form.entity}
+                onChange={set("entity")}
+                placeholder="Reyes Property Group LLC"
               />
             </div>
           </section>
