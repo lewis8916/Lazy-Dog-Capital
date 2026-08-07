@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { submitForm } from "@/lib/submitForm";
 import Honeypot from "@/components/Honeypot";
 import {
   ArrowLeft,
@@ -118,12 +119,7 @@ export default function LoanApplicationForm() {
     setStatus("submitting");
     setServerError("");
     try {
-      const res = await fetch("/api/apply", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, ldc_hp: hp }),
-      });
-      if (!res.ok) throw new Error((await res.json()).error || "Submission failed");
+      await submitForm("/api/apply", { ...values, ldc_hp: hp });
       setStatus("success");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {

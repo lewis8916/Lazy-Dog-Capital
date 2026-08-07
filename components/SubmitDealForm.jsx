@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, CheckCircle2, Loader2, Calculator } from "lucide-react";
 import { computeDeal, formatMoney as money, parseMoney } from "@/lib/dealMath";
+import { submitForm } from "@/lib/submitForm";
 import Honeypot from "@/components/Honeypot";
 
 const initial = {
@@ -80,12 +81,7 @@ export default function SubmitDealForm() {
     setStatus("submitting");
     setServerError("");
     try {
-      const res = await fetch("/api/submit-deal", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, ldc_hp: hp }),
-      });
-      if (!res.ok) throw new Error((await res.json()).error || "Submission failed");
+      await submitForm("/api/submit-deal", { ...form, ldc_hp: hp });
       setStatus("success");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {

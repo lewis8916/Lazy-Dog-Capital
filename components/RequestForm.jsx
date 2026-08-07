@@ -6,6 +6,7 @@ import { ArrowRight, CheckCircle2, Info, Loader2 } from "lucide-react";
 import { allFields } from "@/lib/requestForms";
 import Honeypot from "@/components/Honeypot";
 import { formatMoney } from "@/lib/dealMath";
+import { submitForm } from "@/lib/submitForm";
 
 export default function RequestForm({ schema }) {
   const [values, setValues] = useState({});
@@ -53,12 +54,7 @@ export default function RequestForm({ schema }) {
     setStatus("submitting");
     setServerError("");
     try {
-      const res = await fetch(schema.endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, ldc_hp: hp }),
-      });
-      if (!res.ok) throw new Error((await res.json()).error || "Submission failed");
+      await submitForm(schema.endpoint, { ...values, ldc_hp: hp });
       setStatus("success");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {

@@ -6,6 +6,7 @@ import { ArrowRight, CheckCircle2, Info, Loader2, Plus, X } from "lucide-react";
 import { DRAW_REQUEST, computeDraw } from "@/lib/requestForms";
 import Honeypot from "@/components/Honeypot";
 import { formatMoney, usd } from "@/lib/dealMath";
+import { submitForm } from "@/lib/submitForm";
 import FileUpload, {
   MAX_TOTAL_BYTES,
   formatBytes,
@@ -134,12 +135,7 @@ export default function DrawRequestForm() {
         }
       }
 
-      const res = await fetch(DRAW_REQUEST.endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...v, attachments, ldc_hp: hp }),
-      });
-      if (!res.ok) throw new Error((await res.json()).error || "Submission failed");
+      await submitForm(DRAW_REQUEST.endpoint, { ...v, attachments, ldc_hp: hp });
       setStatus("success");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {

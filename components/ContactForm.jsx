@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { submitForm } from "@/lib/submitForm";
 import Link from "next/link";
 import Honeypot from "@/components/Honeypot";
 import {
@@ -62,12 +63,7 @@ export default function ContactForm() {
     setStatus("submitting");
     setServerError("");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, ldc_hp: hp }),
-      });
-      if (!res.ok) throw new Error((await res.json()).error || "Submission failed");
+      await submitForm("/api/contact", { ...form, ldc_hp: hp });
       setStatus("success");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
