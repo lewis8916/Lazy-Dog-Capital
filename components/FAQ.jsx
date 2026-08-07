@@ -53,7 +53,7 @@ const groups = [
       },
       {
         q: "Will you roll the points into the loan?",
-        a: "Yes, as long as there's room under the 80% of after-repair value cap. Rolling them in costs a quarter point more than paying them at closing. Your 10% down payment still comes from you in cash; that part doesn't get financed. Your loan is just a little larger.",
+        a: "Yes, as long as there's room under the 80% of after-repair value cap. Rolling them in costs half a point more than paying them at closing. Your 10% down payment still comes from you in cash; that part doesn't get financed. Your loan is just a little larger.",
       },
       {
         q: "How is interest calculated?",
