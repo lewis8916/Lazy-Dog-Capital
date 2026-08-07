@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { renderDealEmail } from "@/lib/dealEmail";
 import { guardRequest } from "@/lib/spamGuard";
 import { sendAutoReply } from "@/lib/autoReply";
+import { createProspect } from "@/lib/airtable";
 
 const REQUIRED = ["name", "phone", "email", "address", "price", "rehab", "arv"];
 
@@ -29,6 +30,10 @@ export async function POST(request) {
     return NextResponse.json({ error: "Enter a valid email." }, { status: 400 });
   }
 
+  // Written before the email, not after, so the lead is captured even when
+  // email delivery fails or isn't configured. createProspect never throws.
+  const airtable = await createProspect(data);
+
   const { subject, html, text } = renderDealEmail(data);
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -40,7 +45,11 @@ export async function POST(request) {
       "[deal] RESEND_API_KEY or APPLICATION_TO_EMAIL not set — email not sent."
     );
     console.log("[deal] submission received:\n" + text);
-    return NextResponse.json({ ok: true, emailed: false });
+    return NextResponse.json({
+      ok: true,
+      emailed: false,
+      recorded: airtable.ok,
+    });
   }
 
   try {
@@ -61,7 +70,12 @@ export async function POST(request) {
     // Acknowledge to the sender. Best-effort — never fails the submission.
     const ack = await sendAutoReply("deal", data, data.email);
 
-    return NextResponse.json({ ok: true, emailed: true, acknowledged: ack.sent });
+    return NextResponse.json({
+      ok: true,
+      emailed: true,
+      acknowledged: ack.sent,
+      recorded: airtable.ok,
+    });
   } catch (err) {
     console.error("[deal] email delivery failed:", err.message);
     console.log("[deal] UNDELIVERED submission:\n" + text);
