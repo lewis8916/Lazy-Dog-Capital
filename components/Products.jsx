@@ -14,19 +14,19 @@ const features = [
     icon: Home,
     badge: "One Loan",
     title: "Purchase + Rehab Together",
-    desc: "One loan funds buying the house and renovating it. Part funds at closing to buy the property, and the rest is held back and released to you as the work gets done.",
+    desc: "One loan funds buying the house and renovating it. Your verified rehab budget is held back at closing and released as the work gets done, so the money for the job is committed before you start.",
     points: ["Single-family fix & flip", "Dallas–Fort Worth", "First-timers welcome"],
   },
   {
     icon: Landmark,
     title: "Sized Conservatively",
-    desc: "Every loan is capped at 80% of the home's after-repair value. That one number sets your loan. Sizing against the finished value, rather than what you paid, is what leaves room in the deal for both of us.",
-    points: ["80% of ARV max", "10% down payment", "We verify the comps"],
+    desc: "Every loan is capped at 80% of the home's after-repair value, which we determine ourselves from the comps. Conservative sizing protects your margin as much as our capital.",
+    points: ["80% of ARV max", "10% minimum down", "We verify the comps"],
   },
   {
     icon: ClipboardCheck,
     title: "Rehab Draws",
-    desc: "You pay for the work, then we reimburse you. Request a draw whenever you've finished some line items — no set schedule, no cap on how many. Send a bank statement showing the money left your account, we come look at the work in person, and we fund it.",
+    desc: "You pay for the work, send us proof, we inspect it in person, and we reimburse you. Request a draw whenever you've finished work worth $5,000 or more — there's no set schedule and no cap on how many.",
     points: ["No draw limit", "$5,000 minimum", "We inspect in person"],
   },
   {

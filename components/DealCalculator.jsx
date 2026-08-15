@@ -126,7 +126,11 @@ export default function DealCalculator() {
           {/* Breakdown — the sizing ladder, then the borrower's own numbers */}
           <div className="bg-cream rounded-3xl p-7 sm:p-8 shadow-xl border border-teal/5">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-7">
-              <Stat label="Your 10% down" value={usd(d.down)} />
+              <Stat
+                label="Your 10% down"
+                value={usd(d.down)}
+                note="Floor — some deals require more"
+              />
               <Stat label="Loan you'd need" value={usd(d.loanNeeded)} accent />
               <Stat label="80% of your ARV" value={usd(d.cap)} />
               <Stat
@@ -166,7 +170,7 @@ export default function DealCalculator() {
   );
 }
 
-function Stat({ label, value, accent, tone }) {
+function Stat({ label, value, accent, tone, note }) {
   const color =
     tone === "good"
       ? "text-bronze"
@@ -181,6 +185,9 @@ function Stat({ label, value, accent, tone }) {
       <div className={`font-bold ${accent ? "text-2xl" : "text-xl"} ${color}`}>
         {value}
       </div>
+      {note && (
+        <div className="text-[11px] text-teal/45 mt-1 leading-snug">{note}</div>
+      )}
     </div>
   );
 }

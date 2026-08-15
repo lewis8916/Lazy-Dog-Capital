@@ -220,7 +220,7 @@ export const STEPS = [
           {
             name: "d_down",
             label: "Your down payment",
-            hint: "10% of purchase price",
+            hint: "At least 10% of purchase price",
             money: true,
             required: true,
             pdf: "d_down",

@@ -20,11 +20,11 @@ const groups = [
       },
       {
         q: "How much can I borrow?",
-        a: "Up to 80% of what the property will be worth finished — the after-repair value. That one number sets your loan. Sizing it against the finished value, rather than what you paid, is what leaves room in the deal for both of us.",
+        a: "Up to 80% of the home's after-repair value. We determine that value ourselves from the comps rather than taking a number on faith — sizing the loan conservatively protects you as much as it protects us.",
       },
       {
         q: "How much of my own money do I need?",
-        a: "10% of the purchase price as a down payment, plus closing costs. That goes in ahead of any loan money. Your stake in the deal is part of what makes it a good one.",
+        a: "At least 10% of the purchase price as a down payment, plus closing costs. That goes in ahead of any loan money. Some deals need more than 10% — we'll tell you before you sign anything. Your stake in the deal is part of what makes it a good one.",
       },
       {
         q: "What kinds of properties do you lend on?",
@@ -37,7 +37,7 @@ const groups = [
     items: [
       {
         q: "Does the loan cover the renovation?",
-        a: "Yes — one loan funds the purchase and the rehab. Part funds at closing to buy the property, and the rest is held back and released to you as the work gets done.",
+        a: "Yes — one loan funds the purchase and the rehab. Your verified rehab budget is held back at closing and released as the work gets done, so the money for the job is committed before you start.",
       },
       {
         q: "How long is the loan?",
@@ -53,7 +53,7 @@ const groups = [
       },
       {
         q: "Will you roll the points into the loan?",
-        a: "Yes, as long as there's room under the 80% of after-repair value cap. Rolling them in costs half a point more than paying them at closing. Your 10% down payment still comes from you in cash; that part doesn't get financed. Your loan is just a little larger.",
+        a: "Yes, as long as there's room under the 80% of after-repair value cap. Rolling them in costs half a point more than paying them at closing. Your down payment still comes from you in cash; that part doesn't get financed. Your loan is just a little larger.",
       },
       {
         q: "How is interest calculated?",
@@ -79,11 +79,14 @@ const groups = [
       {
         q: "How do rehab draws work?",
         a: [
-          "You pay for the work first, then we reimburse you. When you've finished some line items, request a draw online. There's no set schedule and no fixed number of draws — request whenever it makes sense. Minimum draw is $5,000.",
-          "You'll upload a bank or credit card statement showing the money left your account to pay your contractor or your sub. Receipts and invoices alone aren't enough. If you paid cash, we just need to see the withdrawal.",
-          "Then one of us comes out and looks at the work in person. Every time. Then we fund it.",
+          "Draws are reimbursement. You pay for the work, send a bank or card statement showing the money left your account, and one of us comes out and inspects it in person. Then we reimburse you. Minimum draw is $5,000, and there's no limit on how many you take.",
+          "Receipts and invoices alone aren't enough. If you paid cash, we just need to see the withdrawal.",
         ],
         cta: { href: "/resources/draw-request", label: "Request a draw" },
+      },
+      {
+        q: "So I have to pay for the rehab myself first?",
+        a: "For each stage, yes — you pay the contractor, then we reimburse you once we've inspected the work. Plan your cash accordingly: you'll need enough on hand to front a stage of work before the draw comes back to you.",
       },
       {
         q: "What if I need money before I've spent anything?",

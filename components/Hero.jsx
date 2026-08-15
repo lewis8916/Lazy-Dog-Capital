@@ -108,9 +108,9 @@ export default function Hero() {
                   {[
                     ["Covers", "Purchase + full rehab"],
                     ["Loan cap", "80% of after-repair value"],
-                    ["You bring", "10% down payment", "Based on purchase price"],
+                    ["You bring", "10% minimum down payment", "Based on purchase price"],
                     ["Term", "Up to 12 months", "One 3-month extension available"],
-                    ["Rehab funds", "Draws, reimbursed as work completes"],
+                    ["Rehab funds", "Reimbursed as work is inspected"],
                     ["Early payoff", "Anytime — no penalty"],
                   ].map(([k, v, note]) => (
                     <div

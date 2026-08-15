@@ -79,12 +79,20 @@ export async function POST(request) {
   } catch (err) {
     console.error("[deal] email delivery failed:", err.message);
     console.log("[deal] UNDELIVERED submission:\n" + text);
-    return NextResponse.json(
-      {
-        error:
-          "We received your deal but could not confirm delivery. Please call us so we can make sure nothing was lost.",
-      },
-      { status: 502 }
-    );
+
+    // The lead is only lost if Airtable missed it too. When the row exists we
+    // have the deal, so the borrower gets the normal success screen and the
+    // email failure is ours to chase.
+    if (airtable.ok) {
+      return NextResponse.json({ ok: true, emailed: false, recorded: true });
+    }
+
+    // Deliberately 200, not 5xx: a 5xx gets replaced by the CDN's own HTML
+    // error page, so the borrower never sees the sentence below.
+    return NextResponse.json({
+      ok: false,
+      error:
+        "We received your deal but could not confirm delivery. Please call 214-740-4989 so we can make sure nothing was lost.",
+    });
   }
 }
