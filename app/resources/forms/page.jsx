@@ -7,6 +7,7 @@ import {
   FileText,
   Calculator,
   Home,
+  BadgeCheck,
 } from "lucide-react";
 
 export const metadata = {
@@ -38,6 +39,12 @@ const GROUPS = [
     heading: "Before You Borrow",
     blurb: "For anyone sizing up a deal or getting started.",
     items: [
+      {
+        icon: BadgeCheck,
+        title: "Get Pre-Qual Letter",
+        desc: "Send us your proof of funds, track record, and lending history and we'll get a pre-qualification letter back to you.",
+        href: "/resources/pre-qual-letter",
+      },
       {
         icon: Calculator,
         title: "Deal Calculator",
