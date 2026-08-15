@@ -24,7 +24,6 @@ const initial = {
   principal: "",
   property: "",
   down_payment: "",
-  closing_costs: "",
   funds: Array.from({ length: PRE_QUAL_REQUEST.fundsHolders }, emptyFund),
   verify: {},
   verify_other: "",
@@ -77,7 +76,6 @@ export default function PreQualForm() {
     const need = {
       entity: "Required",
       principal: "Required",
-      property: "Required",
       down_payment: "Required",
       name: "Required",
       phone: "Required",
@@ -174,19 +172,19 @@ export default function PreQualForm() {
               </div>
               <Field label="Principal completing this form" required error={errors.principal}
                 value={v.principal} onChange={(x) => set("principal", x)} />
-              <Field label="Subject property" required error={errors.property}
+              <Field label="Subject property" error={errors.property}
                 value={v.property} onChange={(x) => set("property", x)}
-                placeholder="If known" />
+                placeholder="If unknown, leave blank" />
             </div>
           </Section>
 
           {/* Part 1 — Proof of Funds */}
           <Section heading="Part 1 — Proof Of Funds">
             <div className="grid sm:grid-cols-2 gap-5">
-              <Field label="Down payment funds" money required error={errors.down_payment}
-                value={v.down_payment} onChange={(x) => set("down_payment", formatMoney(x))} />
-              <Field label="Closing costs & fees" money value={v.closing_costs}
-                onChange={(x) => set("closing_costs", formatMoney(x))} />
+              <div className="sm:col-span-2">
+                <Field label="Down payment funds" money required error={errors.down_payment}
+                  value={v.down_payment} onChange={(x) => set("down_payment", formatMoney(x))} />
+              </div>
             </div>
 
             <div className="mt-6">

@@ -7,7 +7,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import logoReversed from "@/public/logo_reversed.png";
 
 const resources = [
-  { href: "/resources/pre-qual-letter", label: "Get Pre-Qual Letter" },
+  { href: "/resources/pre-qual-letter", label: "Pre-Qual Letter Request" },
   { href: "/resources/draw-request", label: "Draw Request" },
   { href: "/resources/payoff-request", label: "Payoff Request" },
   { href: "/resources/forms", label: "Forms" },

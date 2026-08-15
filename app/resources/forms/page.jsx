@@ -41,7 +41,7 @@ const GROUPS = [
     items: [
       {
         icon: BadgeCheck,
-        title: "Get Pre-Qual Letter",
+        title: "Pre-Qual Letter Request",
         desc: "Send us your proof of funds, track record, and lending history and we'll get a pre-qualification letter back to you.",
         href: "/resources/pre-qual-letter",
       },
