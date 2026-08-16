@@ -7,6 +7,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import logoReversed from "@/public/logo_reversed.png";
 
 const resources = [
+  { href: "/apply", label: "Start Your Loan Application" },
   { href: "/resources/pre-qual-letter", label: "Pre-Qual Letter Request" },
   { href: "/resources/draw-request", label: "Draw Request" },
   { href: "/resources/payoff-request", label: "Payoff Request" },
