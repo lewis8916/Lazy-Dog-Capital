@@ -19,9 +19,9 @@ const features = [
   },
   {
     icon: Landmark,
-    title: "Sized Conservatively",
-    desc: "Every loan is capped at 80% of the home's after-repair value, which we determine ourselves from the comps. Conservative sizing protects your margin as much as our capital.",
-    points: ["80% of ARV max", "10% minimum down", "We verify the comps"],
+    title: "100% of Rehab, Up to 80% of ARV",
+    desc: "We finance 100% of the rehab and up to 80% of the home's after-repair value, which we determine ourselves from the comps. Conservative sizing protects your margin as much as our capital.",
+    points: ["100% of rehab financed", "Up to 80% of ARV", "We verify the comps"],
   },
   {
     icon: ClipboardCheck,
